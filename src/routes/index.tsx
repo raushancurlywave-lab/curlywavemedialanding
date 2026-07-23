@@ -55,6 +55,7 @@ function LandingPage() {
       <Hero />
       <Marquee />
       <Stats />
+      <Testimonials />
       <Services />
       <Pricing />
       <Process />
@@ -304,6 +305,74 @@ function StatCard({ value, suffix, label }: { value: number; suffix: string; lab
       </div>
       <div className="mt-2 text-sm text-muted-foreground">{label}</div>
     </div>
+  );
+}
+
+/* ---------------- Testimonials ---------------- */
+function Testimonials() {
+  const items = [
+    {
+      quote:
+        "Felt like having a full marketing team on call. In 90 days our clinic went from 400 to 12k engaged followers — and 30+ new patient bookings a month.",
+      name: "Dr. Aarti Kapoor",
+      role: "Founder, SkinLuxe Clinic",
+    },
+    {
+      quote:
+        "They coached us through the messy early days — content pillars, hooks, reels. Revenue from Instagram DMs grew 6x in a single quarter.",
+      name: "Rohan Mehta",
+      role: "CEO, Nuttafair",
+    },
+    {
+      quote:
+        "Every Monday we know exactly what's going out. It's the calmest our marketing has ever felt, and the numbers keep climbing.",
+      name: "Sneha Iyer",
+      role: "Owner, Millet Vive Restaurant",
+    },
+  ];
+  return (
+    <section className="py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-4">
+        <SectionHead
+          eyebrow="Client wins"
+          title={<>Founders coached. <span className="text-gold">Numbers moved.</span></>}
+          sub="Real people, real revenue — from clinics and restaurants to D2C brands."
+        />
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-5">
+          {items.map((t, i) => (
+            <motion.figure
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.55, delay: i * 0.08 }}
+              className="glass rounded-3xl p-7 shadow-card flex flex-col"
+            >
+              <div className="flex gap-0.5 text-gold">
+                {Array.from({ length: 5 }).map((_, k) => (
+                  <Star key={k} className="h-4 w-4 fill-current" />
+                ))}
+              </div>
+              <blockquote
+                className="mt-4 text-lg leading-relaxed tracking-tight text-foreground"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                &ldquo;{t.quote}&rdquo;
+              </blockquote>
+              <figcaption className="mt-6 flex items-center gap-3 pt-5 border-t border-border">
+                <div className="h-10 w-10 rounded-full bg-gold flex items-center justify-center text-primary-foreground font-bold">
+                  {t.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                </div>
+                <div>
+                  <div className="text-sm font-semibold tracking-tight">{t.name}</div>
+                  <div className="text-xs text-muted-foreground">{t.role}</div>
+                </div>
+              </figcaption>
+            </motion.figure>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
