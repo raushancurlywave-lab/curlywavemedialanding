@@ -7,6 +7,7 @@ import {
   BarChart3, Globe, Layout, Building2, Megaphone, ShieldCheck, Zap, Clock, TrendingUp,
 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import logoAsset from "@/assets/curlywave-logo.jpeg.asset.json";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -85,8 +86,8 @@ function Nav() {
             scrolled ? "glass-strong shadow-card" : "glass"
           }`}
         >
-          <a href="#top" className="flex items-center gap-2.5 pl-2">
-            <Logo />
+          <a href="#top" className="flex items-center gap-2.5 pl-1">
+            <Logo size={32} />
             <span className="font-semibold tracking-tight text-sm">CurlyWave</span>
           </a>
           <nav className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
@@ -106,10 +107,19 @@ function Nav() {
   );
 }
 
-function Logo() {
+function Logo({ size = 36 }: { size?: number }) {
   return (
-    <div className="relative h-8 w-8 rounded-lg bg-gold shadow-glow overflow-hidden">
-      <div className="absolute inset-0 flex items-center justify-center text-primary-foreground font-bold text-sm">C</div>
+    <div
+      className="relative rounded-xl overflow-hidden ring-1 ring-border shadow-card"
+      style={{ height: size, width: size }}
+    >
+      <img
+        src={logoAsset.url}
+        alt="CurlyWave Media logo"
+        width={size}
+        height={size}
+        className="h-full w-full object-cover"
+      />
     </div>
   );
 }
@@ -142,10 +152,11 @@ function Hero() {
           transition={{ duration: 0.6 }}
           className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs text-muted-foreground"
         >
+          <img src={logoAsset.url} alt="" className="h-4 w-4 rounded" />
           <span className="inline-flex items-center gap-1 text-gold">
             <Star className="h-3.5 w-3.5 fill-current" />
           </span>
-          Trusted by 100+ Brands across India
+          Your growth coach for social media · 100+ brands scaled
         </motion.div>
 
         <motion.h1
@@ -154,10 +165,10 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mt-6 text-5xl md:text-7xl lg:text-[5.25rem] leading-[1.02] tracking-tight font-semibold text-gradient"
         >
-          Social media that turns
+          We coach your brand
           <br />
           <span className="italic font-normal" style={{ fontFamily: "var(--font-display)" }}>
-            followers into customers.
+            to grow every single day.
           </span>
         </motion.h1>
 
@@ -167,9 +178,9 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed"
         >
-          A dedicated team of writers, designers and strategists managing your brand
-          end-to-end — posts, reels, ads and reports. No freelancer chaos.
-          No missed deadlines. Just growth you can measure.
+          A hands-on team of strategists, writers and designers who mentor your
+          brand like a coach — daily posts, weekly reels, monthly playbooks and
+          real results you can measure in 90 days.
         </motion.p>
 
         <motion.div
@@ -178,9 +189,9 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="mt-9 flex flex-wrap items-center justify-center gap-3"
         >
-          <a href="#pricing">
+          <a href="#start">
             <Button size="lg" className="rounded-full bg-gold text-gold-foreground hover:opacity-90 font-semibold h-12 px-7 shadow-glow">
-              Start My 3-Month Plan <ArrowRight className="ml-2 h-4 w-4" />
+              Book a Free Discovery Call <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </a>
           <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer">
@@ -198,7 +209,7 @@ function Hero() {
         >
           <span className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-gold" /> Razorpay secured payments</span>
           <span className="flex items-center gap-1.5"><Zap className="h-3.5 w-3.5 text-gold" /> Onboard in 24 hours</span>
-          <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5 text-gold" /> Dedicated manager</span>
+          <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5 text-gold" /> 1:1 dedicated coach</span>
         </motion.div>
       </div>
     </section>
