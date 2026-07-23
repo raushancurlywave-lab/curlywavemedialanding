@@ -7,6 +7,7 @@ import {
   BarChart3, Globe, Layout, Building2, Megaphone, ShieldCheck, Zap, Clock, TrendingUp,
 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import logoAsset from "@/assets/curlywave-logo.jpeg.asset.json";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -54,6 +55,7 @@ function LandingPage() {
       <Hero />
       <Marquee />
       <Stats />
+      <Testimonials />
       <Services />
       <Pricing />
       <Process />
@@ -85,8 +87,8 @@ function Nav() {
             scrolled ? "glass-strong shadow-card" : "glass"
           }`}
         >
-          <a href="#top" className="flex items-center gap-2.5 pl-2">
-            <Logo />
+          <a href="#top" className="flex items-center gap-2.5 pl-1">
+            <Logo size={32} />
             <span className="font-semibold tracking-tight text-sm">CurlyWave</span>
           </a>
           <nav className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
@@ -106,10 +108,19 @@ function Nav() {
   );
 }
 
-function Logo() {
+function Logo({ size = 36 }: { size?: number }) {
   return (
-    <div className="relative h-8 w-8 rounded-lg bg-gold shadow-glow overflow-hidden">
-      <div className="absolute inset-0 flex items-center justify-center text-primary-foreground font-bold text-sm">C</div>
+    <div
+      className="relative rounded-xl overflow-hidden ring-1 ring-border shadow-card"
+      style={{ height: size, width: size }}
+    >
+      <img
+        src={logoAsset.url}
+        alt="CurlyWave Media logo"
+        width={size}
+        height={size}
+        className="h-full w-full object-cover"
+      />
     </div>
   );
 }
@@ -142,10 +153,11 @@ function Hero() {
           transition={{ duration: 0.6 }}
           className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs text-muted-foreground"
         >
+          <img src={logoAsset.url} alt="" className="h-4 w-4 rounded" />
           <span className="inline-flex items-center gap-1 text-gold">
             <Star className="h-3.5 w-3.5 fill-current" />
           </span>
-          Trusted by 100+ Brands across India
+          Your growth coach for social media · 100+ brands scaled
         </motion.div>
 
         <motion.h1
@@ -154,10 +166,10 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mt-6 text-5xl md:text-7xl lg:text-[5.25rem] leading-[1.02] tracking-tight font-semibold text-gradient"
         >
-          Social media that turns
+          We coach your brand
           <br />
           <span className="italic font-normal" style={{ fontFamily: "var(--font-display)" }}>
-            followers into customers.
+            to grow every single day.
           </span>
         </motion.h1>
 
@@ -167,9 +179,9 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed"
         >
-          A dedicated team of writers, designers and strategists managing your brand
-          end-to-end — posts, reels, ads and reports. No freelancer chaos.
-          No missed deadlines. Just growth you can measure.
+          A hands-on team of strategists, writers and designers who mentor your
+          brand like a coach — daily posts, weekly reels, monthly playbooks and
+          real results you can measure in 90 days.
         </motion.p>
 
         <motion.div
@@ -178,9 +190,9 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="mt-9 flex flex-wrap items-center justify-center gap-3"
         >
-          <a href="#pricing">
+          <a href="#start">
             <Button size="lg" className="rounded-full bg-gold text-gold-foreground hover:opacity-90 font-semibold h-12 px-7 shadow-glow">
-              Start My 3-Month Plan <ArrowRight className="ml-2 h-4 w-4" />
+              Book a Free Discovery Call <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </a>
           <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer">
@@ -198,7 +210,7 @@ function Hero() {
         >
           <span className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-gold" /> Razorpay secured payments</span>
           <span className="flex items-center gap-1.5"><Zap className="h-3.5 w-3.5 text-gold" /> Onboard in 24 hours</span>
-          <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5 text-gold" /> Dedicated manager</span>
+          <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5 text-gold" /> 1:1 dedicated coach</span>
         </motion.div>
       </div>
     </section>
@@ -293,6 +305,74 @@ function StatCard({ value, suffix, label }: { value: number; suffix: string; lab
       </div>
       <div className="mt-2 text-sm text-muted-foreground">{label}</div>
     </div>
+  );
+}
+
+/* ---------------- Testimonials ---------------- */
+function Testimonials() {
+  const items = [
+    {
+      quote:
+        "Felt like having a full marketing team on call. In 90 days our clinic went from 400 to 12k engaged followers — and 30+ new patient bookings a month.",
+      name: "Dr. Aarti Kapoor",
+      role: "Founder, SkinLuxe Clinic",
+    },
+    {
+      quote:
+        "They coached us through the messy early days — content pillars, hooks, reels. Revenue from Instagram DMs grew 6x in a single quarter.",
+      name: "Rohan Mehta",
+      role: "CEO, Nuttafair",
+    },
+    {
+      quote:
+        "Every Monday we know exactly what's going out. It's the calmest our marketing has ever felt, and the numbers keep climbing.",
+      name: "Sneha Iyer",
+      role: "Owner, Millet Vive Restaurant",
+    },
+  ];
+  return (
+    <section className="py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-4">
+        <SectionHead
+          eyebrow="Client wins"
+          title={<>Founders coached. <span className="text-gold">Numbers moved.</span></>}
+          sub="Real people, real revenue — from clinics and restaurants to D2C brands."
+        />
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-5">
+          {items.map((t, i) => (
+            <motion.figure
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.55, delay: i * 0.08 }}
+              className="glass rounded-3xl p-7 shadow-card flex flex-col"
+            >
+              <div className="flex gap-0.5 text-gold">
+                {Array.from({ length: 5 }).map((_, k) => (
+                  <Star key={k} className="h-4 w-4 fill-current" />
+                ))}
+              </div>
+              <blockquote
+                className="mt-4 text-lg leading-relaxed tracking-tight text-foreground"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                &ldquo;{t.quote}&rdquo;
+              </blockquote>
+              <figcaption className="mt-6 flex items-center gap-3 pt-5 border-t border-border">
+                <div className="h-10 w-10 rounded-full bg-gold flex items-center justify-center text-primary-foreground font-bold">
+                  {t.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                </div>
+                <div>
+                  <div className="text-sm font-semibold tracking-tight">{t.name}</div>
+                  <div className="text-xs text-muted-foreground">{t.role}</div>
+                </div>
+              </figcaption>
+            </motion.figure>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
