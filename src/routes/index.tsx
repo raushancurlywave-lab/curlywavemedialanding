@@ -126,7 +126,7 @@ function Hero() {
           width={1920}
           height={1200}
           fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover opacity-40"
+          className="absolute inset-0 h-full w-full object-cover opacity-20"
         />
         <div className="absolute inset-0 hero-bg" />
         <div className="absolute inset-0 grid-lines opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
@@ -184,7 +184,7 @@ function Hero() {
             </Button>
           </a>
           <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer">
-            <Button size="lg" variant="outline" className="rounded-full glass-strong border-white/15 hover:bg-white/10 h-12 px-7 font-medium">
+            <Button size="lg" variant="outline" className="rounded-full glass-strong border-foreground/20 hover:bg-foreground/5 h-12 px-7 font-medium">
               <MessageCircle className="mr-2 h-4 w-4" /> Chat on WhatsApp
             </Button>
           </a>
@@ -238,7 +238,7 @@ function Marquee() {
   ];
   const row = [...brands, ...brands];
   return (
-    <section className="py-14 border-y border-white/5 bg-black/20">
+    <section className="py-14 border-y border-border bg-secondary/40">
       <p className="text-center text-xs uppercase tracking-[0.2em] text-muted-foreground mb-8">
         Trusted by ambitious brands
       </p>
@@ -421,7 +421,7 @@ const PLANS: Plan[] = [
 function Pricing() {
   return (
     <section id="pricing" className="py-24 md:py-32 relative">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="mx-auto max-w-6xl px-4">
         <SectionHead
           eyebrow="Pricing"
@@ -438,7 +438,7 @@ function Pricing() {
               transition={{ duration: 0.55, delay: i * 0.08 }}
               className={`relative rounded-3xl p-7 flex flex-col ${
                 plan.highlight
-                  ? "bg-gradient-to-b from-white/10 to-white/[0.02] border border-gold/40 shadow-glow"
+                  ? "bg-gradient-to-b from-gold/15 to-background border border-gold/40 shadow-glow"
                   : "glass shadow-card"
               }`}
             >
@@ -470,7 +470,7 @@ function Pricing() {
                   className={`w-full rounded-full h-11 font-semibold ${
                     plan.highlight
                       ? "bg-gold text-gold-foreground hover:opacity-90"
-                      : "bg-white/10 hover:bg-white/15 text-foreground"
+                      : "bg-foreground hover:bg-foreground/90 text-foreground"
                   }`}
                 >
                   {plan.cta}
@@ -588,7 +588,7 @@ function LeadForm() {
                       className={`text-xs px-3 py-2 rounded-full border transition ${
                         plan === p.name
                           ? "bg-gold text-primary-foreground border-transparent font-semibold"
-                          : "glass border-white/10 text-muted-foreground hover:text-foreground"
+                          : "glass border-border text-muted-foreground hover:text-foreground"
                       }`}
                     >
                       {p.name}
@@ -631,7 +631,7 @@ function Field({
         type={type}
         required={required}
         placeholder={placeholder}
-        className="h-11 rounded-xl bg-white/[0.04] border-white/10 focus-visible:ring-gold/60 focus-visible:border-gold/40 placeholder:text-muted-foreground/50"
+        className="h-11 rounded-xl bg-card border-border focus-visible:ring-gold/60 focus-visible:border-gold/40 placeholder:text-muted-foreground/50"
       />
     </div>
   );
@@ -674,7 +674,7 @@ function FAQ() {
 /* ---------------- Footer ---------------- */
 function Footer() {
   return (
-    <footer className="border-t border-white/5 pt-16 pb-10 mt-10">
+    <footer className="border-t border-border pt-16 pb-10 mt-10">
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           <div className="col-span-2">
@@ -704,7 +704,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-14 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between gap-3 text-xs text-muted-foreground">
+        <div className="mt-14 pt-6 border-t border-border flex flex-col md:flex-row justify-between gap-3 text-xs text-muted-foreground">
           <div>© {new Date().getFullYear()} CurlyWave Media & Automation Pvt. Ltd. All rights reserved.</div>
           <div>GST compliant · Payments secured by Razorpay</div>
         </div>
