@@ -5,6 +5,7 @@ import {
   Bell, PlayCircle, Check, MessageCircle, ShieldCheck, TrendingUp, DollarSign, Bot,
   Instagram, Facebook, Star, Search, Award, Zap, Users, Store, Stethoscope, UtensilsCrossed,
   GraduationCap, ShoppingBag, User, Palette, Home, Trophy, ArrowRight, Sparkles, Clock,
+  Camera, PenTool, BarChart3, Megaphone, Video, Target,
 } from "lucide-react";
 import logoAsset from "@/assets/curlywave-logo.jpeg.asset.json";
 import { Button } from "@/components/ui/button";
@@ -18,17 +19,17 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CurlyWave Workshop — Grow Your Business With Social Media & WhatsApp Automation" },
+      { title: "CurlyWave Media — Social Media Management & Automation for Growing Brands" },
       {
         name: "description",
         content:
-          "Join our 2-hour LIVE workshop and discover how to grow your business with Instagram, Facebook & WhatsApp automation. Register now at just ₹99.",
+          "CurlyWave Media & Automation Pvt. Ltd. — done-for-you Instagram, Facebook & WhatsApp management. Plans from ₹499/mo. Book a free strategy call.",
       },
-      { property: "og:title", content: "CurlyWave Workshop — Grow Your Business On Automation" },
-      { property: "og:description", content: "2-Hour LIVE Workshop. Learn WhatsApp, Instagram & Facebook automation to grow your business. Just ₹99." },
+      { property: "og:title", content: "CurlyWave Media — Social Media Management Agency" },
+      { property: "og:description", content: "Done-for-you social media, content & WhatsApp automation. Plans starting ₹499/mo." },
       { property: "og:url", content: "/" },
-      { name: "twitter:title", content: "CurlyWave Workshop — Grow On Automation" },
-      { name: "twitter:description", content: "2-Hour LIVE Workshop. Just ₹99." },
+      { name: "twitter:title", content: "CurlyWave Media — Social Media Management Agency" },
+      { name: "twitter:description", content: "Done-for-you social media & WhatsApp automation. From ₹499/mo." },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
@@ -68,9 +69,9 @@ function SectionTitle({ eyebrow, title }: { eyebrow?: string; title: React.React
   );
 }
 
-function CTAButton({ label = "Register Now at just ₹99", full = false }: { label?: string; full?: boolean }) {
+function CTAButton({ label = "Book Free Strategy Call", full = false }: { label?: string; full?: boolean }) {
   return (
-    <a href="#register" className={full ? "block" : "inline-block"}>
+    <a href="#contact" className={full ? "block" : "inline-block"}>
       <Button
         size="lg"
         className={`h-14 px-8 text-base sm:text-lg font-bold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-glow ${full ? "w-full" : ""}`}
@@ -82,8 +83,8 @@ function CTAButton({ label = "Register Now at just ₹99", full = false }: { lab
 }
 
 function LandingPage() {
-  const { d, h, m, s } = useCountdown(60 * 24);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", business: "" });
+  const { d, h, m, s } = useCountdown(60 * 24 * 3);
+  const [form, setForm] = useState({ name: "", email: "", phone: "", business: "", plan: "Growth" });
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,60 +92,103 @@ function LandingPage() {
       toast.error("Please fill in name, email and phone.");
       return;
     }
-    toast.success("Registration received! Redirecting to payment…");
+    toast.success("Thanks! Our team will call you within 24 hours.");
   };
 
-  const learn = [
-    { icon: MessageCircle, title: "WhatsApp Marketing Mastery", desc: "Reach thousands of customers in their WhatsApp inbox without getting banned or reported." },
-    { icon: ShoppingBag, title: "Catalog Sales Simplified", desc: "Set up your WhatsApp business catalog and sell products directly — no website needed." },
-    { icon: TrendingUp, title: "Social Lead Conversion", desc: "Proven methods to generate leads from Facebook & Instagram and convert them into paying customers." },
-    { icon: PlayCircle, title: "Engage With Multimedia", desc: "Send promotional and reminder messages with images, videos and CTA buttons on WhatsApp." },
-    { icon: ShieldCheck, title: "Get Verified Fast", desc: "Get the Green Tick on WhatsApp Business API for higher open rates and trust." },
-    { icon: Facebook, title: "Automate Facebook Growth", desc: "Automated replies on Facebook comments, stories and Messenger to boost sales." },
-    { icon: Instagram, title: "Automate Instagram Engagement", desc: "Auto-reply on posts, story mentions and DMs for faster customer conversion." },
-    { icon: Search, title: "Boost Google Rankings", desc: "Rank higher on Google with 5-star reviews and win qualified high-paying customers." },
+  const services = [
+    { icon: Instagram, title: "Instagram Management", desc: "Daily posting, reels, stories, hashtag strategy and DM handling that grows real followers." },
+    { icon: Facebook, title: "Facebook Growth", desc: "Page management, community building and boosted posts that drive local footfall & leads." },
+    { icon: MessageCircle, title: "WhatsApp Automation", desc: "Green Tick, catalog, broadcast & chatbot flows that turn chats into paying customers." },
+    { icon: PenTool, title: "Content Creation", desc: "Scroll-stopping graphics, captions and short-form video written by humans, not templates." },
+    { icon: Video, title: "Reels & Video Editing", desc: "Cinematic reels and product videos edited to trend — 12–20 pieces every month." },
+    { icon: Camera, title: "Photoshoots On-Location", desc: "Professional product & lifestyle shoots at your store, clinic or restaurant." },
+    { icon: Megaphone, title: "Meta & Google Ads", desc: "Full-funnel paid campaigns with clear ROAS reporting — no guesswork, no fluff." },
+    { icon: Search, title: "SEO & Google Reviews", desc: "Rank higher on local search and stack authentic 5-star reviews on Google." },
+    { icon: Target, title: "Lead Generation", desc: "Qualified leads delivered to your WhatsApp — pay for outcomes, not vanity metrics." },
+    { icon: Bot, title: "Chatbot & CRM Setup", desc: "24/7 auto-replies, appointment booking & lead capture on WhatsApp and Instagram." },
+    { icon: BarChart3, title: "Analytics & Reporting", desc: "Weekly dashboards that show what's working — reach, engagement, leads and sales." },
+    { icon: Palette, title: "Brand Identity", desc: "Logo refresh, brand kit and templates that make your feed instantly recognisable." },
   ];
 
   const forYou = [
-    { icon: ShieldCheck, title: "Prevent WhatsApp Bans", desc: "Tired of your number getting banned when sending bulk messages on WhatsApp." },
-    { icon: Trophy, title: "Stay Ahead Competitively", desc: "Your competition is growing and you don't want to lose customers to them." },
-    { icon: DollarSign, title: "Cost-Effective Marketing", desc: "You don't want to spend lakhs of rupees on marketing your business." },
-    { icon: Bot, title: "Automate Customer Replies", desc: "You're struggling with manually replying to sales inquiries and customers." },
-  ];
-
-  const bonuses = [
-    { n: 1, title: "Live Training & Video Tutorials", worth: "₹2,000" },
-    { n: 2, title: "Facebook & Instagram Automation Strategy", worth: "₹3,500" },
-    { n: 3, title: "Smart Methods to Increase 5-Star Google Reviews", worth: "₹1,100" },
-    { n: 4, title: "Roadmap to Convert Leads into Paying Customers", worth: "₹1,200" },
+    { icon: ShieldCheck, title: "You're Invisible Online", desc: "Customers can't find you on Instagram or Google — competitors are eating your lunch." },
+    { icon: Trophy, title: "You Post But Nothing Grows", desc: "Random posts, zero strategy, followers stuck at the same number for months." },
+    { icon: DollarSign, title: "Ads Are Burning Cash", desc: "Running Meta ads without a funnel and watching the budget vanish with no leads." },
+    { icon: Bot, title: "Replies Are Killing You", desc: "You're glued to WhatsApp answering the same 10 questions from every customer." },
   ];
 
   const outcomes = [
-    "Satisfied and loyal customers",
-    "Operational efficiency on autopilot",
-    "Quality leads on automation",
-    "Be available 24/7 for your customers",
-    "High conversion rate",
-    "Increased sales and revenue",
+    "A feed that actually looks like a brand",
+    "Consistent daily posting on autopilot",
+    "Qualified leads in your WhatsApp inbox",
+    "24/7 automated customer replies",
+    "Higher Google rank & 5-star reviews",
+    "Clear monthly ROI reports — no jargon",
   ];
 
   const perfectFor = [
     { icon: Store, label: "Small Business Owners" },
     { icon: Stethoscope, label: "Doctors, Dentists & Lawyers" },
-    { icon: UtensilsCrossed, label: "Hotel & Restaurant Owners" },
+    { icon: UtensilsCrossed, label: "Hotels & Restaurants" },
     { icon: GraduationCap, label: "Coaches & Consultants" },
-    { icon: ShoppingBag, label: "E-commerce Owners" },
-    { icon: User, label: "Solopreneurs / Self-employed" },
-    { icon: Palette, label: "Makeup Artists & Bakers" },
-    { icon: Home, label: "Real Estate Owners & Agents" },
+    { icon: ShoppingBag, label: "D2C & E-commerce Brands" },
+    { icon: User, label: "Solopreneurs & Freelancers" },
+    { icon: Palette, label: "Salons, Makeup & Bakers" },
+    { icon: Home, label: "Real Estate Agents" },
+  ];
+
+  const plans = [
+    {
+      name: "Starter",
+      price: 499,
+      tagline: "For solopreneurs testing the waters",
+      badge: null,
+      features: [
+        "1 platform (Instagram or Facebook)",
+        "8 posts / month",
+        "4 reels / month",
+        "Caption + hashtag strategy",
+        "Basic monthly report",
+        "Email support",
+      ],
+    },
+    {
+      name: "Growth",
+      price: 999,
+      tagline: "Most-loved plan for growing brands",
+      badge: "Most Popular",
+      features: [
+        "2 platforms (IG + FB)",
+        "20 posts + 12 reels / month",
+        "WhatsApp catalog setup",
+        "Story & DM management",
+        "Weekly performance report",
+        "Priority WhatsApp support",
+      ],
+    },
+    {
+      name: "Business",
+      price: 5999,
+      tagline: "Fully done-for-you growth engine",
+      badge: "Best ROI",
+      features: [
+        "IG + FB + WhatsApp + Google",
+        "30+ posts, 20+ reels, on-location shoots",
+        "Meta & Google Ads management",
+        "WhatsApp Green Tick + chatbot",
+        "Dedicated account manager",
+        "Weekly strategy calls + live dashboard",
+      ],
+    },
   ];
 
   const faqs = [
-    { q: "Is it a live or pre-recorded workshop?", a: "This is a LIVE workshop where you can ask questions at the end." },
-    { q: "Will I get a recording of the workshop?", a: "We don't provide recordings. Please clear your calendar to attend live and get the best experience." },
-    { q: "Is it for all types of businesses?", a: "Yes — digital automation works for every business type. It's the fastest way to grow." },
-    { q: "I made the payment but didn't receive any email.", a: "Please reach out to us via email or phone and our team will get back to you immediately." },
-    { q: "How will I join the workshop?", a: "You'll receive a Zoom invite a few hours before the workshop on your registered email and in our WhatsApp group." },
+    { q: "How soon do you start after I sign up?", a: "Onboarding takes 48 hours. You'll get a dedicated WhatsApp group, brand questionnaire and content calendar within 3 working days." },
+    { q: "Do I need to give access to my accounts?", a: "Yes — we use secure Meta Business Suite access. You stay the owner at all times; we never change passwords." },
+    { q: "Is there a lock-in contract?", a: "No lock-in. Plans are billed monthly and you can pause or cancel anytime with 7 days notice." },
+    { q: "Do you handle ads budget separately?", a: "Yes. Management fee is what you see; the ad spend goes directly to Meta/Google from your card and is fully transparent." },
+    { q: "Which cities do you serve?", a: "We serve clients across India. On-location shoots (Business plan) are available in top 10 metros; other cities on request." },
+    { q: "How do I pay?", a: "Secure payments via Razorpay — UPI, cards, netbanking. GST invoice provided every month." },
   ];
 
   return (
@@ -152,7 +196,7 @@ function LandingPage() {
       {/* Top Bar */}
       <div className="bg-primary text-primary-foreground text-center py-3 px-4 text-sm sm:text-base font-semibold">
         <Bell className="inline h-4 w-4 mr-2 animate-pulse" />
-        Mark Your Calendars! Join us on 15 August 2026, at 10:00 AM for an Exclusive Webinar!
+        Onboarding just 5 new brands this month — Book your free strategy call today.
       </div>
 
       {/* HERO */}
@@ -160,13 +204,13 @@ function LandingPage() {
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-bold text-sm mb-6 shadow-glow">
-              <PlayCircle className="h-4 w-4" /> 2 Hours LIVE Workshop
+              <Sparkles className="h-4 w-4" /> Social Media Management Agency
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
-              Discover How To <span className="text-primary">Increase Sales</span>, Improve <span className="text-primary">Customer Satisfaction</span> and <span className="text-primary">Grow Your Business</span> With <span className="text-primary">WhatsApp</span>, Instagram & Facebook Automation
+              We Grow Your <span className="text-primary">Instagram</span>, <span className="text-primary">Facebook</span> & <span className="text-primary">WhatsApp</span> — So You Can Focus On Running The Business
             </h1>
             <p className="mt-5 text-lg text-muted-foreground font-medium">
-              (Without any prior experience or technical knowledge)
+              Done-for-you content, ads and automation for small businesses, doctors, restaurants & D2C brands. Plans starting at <span className="font-bold text-foreground">₹499/mo</span>.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <CTAButton />
@@ -177,6 +221,10 @@ function LandingPage() {
                   <div>& Automation Pvt. Ltd.</div>
                 </div>
               </div>
+            </div>
+            <div className="mt-6 flex items-center gap-4 text-sm text-muted-foreground font-semibold">
+              <div className="flex gap-1">{[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-gold text-gold" />)}</div>
+              <span>Rated 4.9/5 by 500+ Indian brands</span>
             </div>
           </div>
 
@@ -197,9 +245,9 @@ function LandingPage() {
                   <PlayCircle className="h-12 w-12" />
                 </button>
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-semibold">
-                  <span className="bg-card/90 backdrop-blur px-3 py-1.5 rounded-full">Live Workshop Preview</span>
-                  <span className="bg-destructive text-destructive-foreground px-3 py-1.5 rounded-full flex items-center gap-1">
-                    <span className="h-2 w-2 rounded-full bg-white animate-pulse" /> LIVE
+                  <span className="bg-card/90 backdrop-blur px-3 py-1.5 rounded-full">See client results (90s)</span>
+                  <span className="bg-primary text-primary-foreground px-3 py-1.5 rounded-full flex items-center gap-1">
+                    <TrendingUp className="h-3.5 w-3.5" /> +312% Reach
                   </span>
                 </div>
               </div>
@@ -208,29 +256,42 @@ function LandingPage() {
         </div>
       </Section>
 
-      {/* Featured In */}
+      {/* Featured In / Stats */}
       <Section className="bg-secondary/50 py-10">
         <div className="max-w-5xl mx-auto">
-          <p className="text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mb-6">As Featured In</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 items-center justify-items-center opacity-80">
-            {["The Times of India", "Dainik Bhaskar", "YourStory", "Startup Story"].map((n) => (
+          <p className="text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mb-6">Trusted By Growing Indian Brands</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 items-center justify-items-center opacity-80 mb-10">
+            {["Metropolis Labs", "OZiva", "The Local Kitchen", "Skin Story"].map((n) => (
               <div key={n} className="font-display text-lg sm:text-xl font-bold text-foreground/70">{n}</div>
+            ))}
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+            {[
+              { n: "500+", l: "Brands Managed" },
+              { n: "12M+", l: "Monthly Reach" },
+              { n: "38K+", l: "Leads Delivered" },
+              { n: "4.9★", l: "Client Rating" },
+            ].map((st) => (
+              <div key={st.l} className="bg-card border border-border rounded-2xl p-5 shadow-card">
+                <div className="text-3xl font-bold text-primary">{st.n}</div>
+                <div className="text-xs uppercase tracking-widest font-bold text-muted-foreground mt-1">{st.l}</div>
+              </div>
             ))}
           </div>
         </div>
       </Section>
 
-      {/* Why Attend */}
+      {/* Why Us */}
       <Section>
-        <SectionTitle eyebrow="Benefits" title={<>Why Attend This <span className="text-primary">Workshop?</span></>} />
+        <SectionTitle eyebrow="Why CurlyWave" title={<>Everything Your Brand Needs — <span className="text-primary">Under One Roof</span></>} />
         <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-4">
           {[
-            "Increase your credibility with the Green Tick",
-            "Get more sales and repeat customers for your business",
-            "Increase your business revenue and profits",
-            "Automate business operations & get more freedom",
-            "Attract leads & convert them into paying clients",
-            "Save lakhs on manual marketing spend",
+            "Dedicated content team — no interns, no AI-only slop",
+            "Green Tick WhatsApp with catalog + chatbot",
+            "Transparent monthly reports with real ROI",
+            "No lock-in — cancel anytime after 30 days",
+            "Meta & Google certified ad managers",
+            "GST invoice & secure Razorpay payments",
           ].map((b) => (
             <div key={b} className="flex items-start gap-3 bg-card border border-border rounded-xl p-4 shadow-card">
               <div className="h-8 w-8 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
@@ -243,17 +304,17 @@ function LandingPage() {
         <div className="text-center mt-10"><CTAButton /></div>
       </Section>
 
-      {/* What You'll Learn */}
+      {/* Services */}
       <Section className="bg-secondary/40">
-        <SectionTitle eyebrow="Curriculum" title={<>What You Will <span className="text-primary">Learn</span> In The Workshop?</>} />
+        <SectionTitle eyebrow="Services" title={<>What We <span className="text-primary">Do For You</span></>} />
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {learn.map((l, i) => (
+          {services.map((l, i) => (
             <motion.div
               key={l.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
+              transition={{ delay: i * 0.04 }}
               className="bg-card border border-border rounded-2xl p-6 shadow-card hover:-translate-y-1 hover:shadow-glow transition"
             >
               <div className="h-12 w-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center mb-4">
@@ -267,9 +328,9 @@ function LandingPage() {
         <div className="text-center mt-10"><CTAButton /></div>
       </Section>
 
-      {/* Designed For You If */}
+      {/* Is This You */}
       <Section>
-        <SectionTitle eyebrow="Is This For You?" title={<>The Workshop Is <span className="text-primary">Designed For You</span> If…</>} />
+        <SectionTitle eyebrow="Sound Familiar?" title={<>You Need Us <span className="text-primary">If…</span></>} />
         <div className="max-w-5xl mx-auto grid sm:grid-cols-2 gap-5">
           {forYou.map((f) => (
             <div key={f.title} className="flex gap-5 bg-card border border-border rounded-2xl p-6 shadow-card">
@@ -285,57 +346,72 @@ function LandingPage() {
         </div>
       </Section>
 
-      {/* Bonuses */}
-      <Section className="bg-primary text-primary-foreground">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-sm font-bold uppercase tracking-widest opacity-80 mb-3">Special Offer</p>
-          <h2 className="text-3xl sm:text-5xl font-bold mb-3">Register Now & Claim</h2>
-          <h3 className="text-3xl sm:text-5xl font-bold mb-10">
-            <span className="text-gold">4 Exclusive Bonuses</span> For FREE
-          </h3>
-          <div className="space-y-4 text-left">
-            {bonuses.map((b) => (
-              <div key={b.n} className="bg-primary-foreground/10 backdrop-blur border border-primary-foreground/20 rounded-xl p-5 flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full bg-gold text-gold-foreground flex items-center justify-center font-bold">
-                    {b.n}
+      {/* PRICING */}
+      <Section id="pricing" className="bg-primary text-primary-foreground">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-sm font-bold uppercase tracking-widest opacity-80 mb-3">Simple, Transparent Pricing</p>
+            <h2 className="text-3xl sm:text-5xl font-bold mb-3">Pick The Plan That <span className="text-gold">Fits Your Growth</span></h2>
+            <p className="opacity-80 font-medium">All plans include content, posting & monthly reporting. No hidden fees.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {plans.map((p) => {
+              const highlight = p.name === "Growth";
+              return (
+                <div
+                  key={p.name}
+                  className={`relative rounded-2xl p-7 border shadow-card flex flex-col ${
+                    highlight
+                      ? "bg-gold text-gold-foreground border-gold scale-[1.02]"
+                      : "bg-primary-foreground/10 backdrop-blur border-primary-foreground/20"
+                  }`}
+                >
+                  {p.badge && (
+                    <div className={`absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
+                      highlight ? "bg-primary text-primary-foreground" : "bg-gold text-gold-foreground"
+                    }`}>
+                      {p.badge}
+                    </div>
+                  )}
+                  <h3 className="text-2xl font-bold">{p.name}</h3>
+                  <p className={`text-sm font-medium mt-1 ${highlight ? "opacity-80" : "opacity-70"}`}>{p.tagline}</p>
+                  <div className="mt-5 flex items-baseline gap-2">
+                    <span className="text-5xl font-bold">₹{p.price.toLocaleString("en-IN")}</span>
+                    <span className="font-semibold opacity-70">/mo</span>
                   </div>
-                  <div>
-                    <div className="text-xs font-bold uppercase opacity-80">Bonus {b.n}</div>
-                    <div className="font-bold text-lg">{b.title}</div>
-                  </div>
+                  <ul className="mt-6 space-y-3 flex-1">
+                    {p.features.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-sm font-semibold">
+                        <Check className="h-5 w-5 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a href="#contact" className="mt-7">
+                    <Button
+                      size="lg"
+                      className={`w-full h-12 rounded-xl font-bold ${
+                        highlight
+                          ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                          : "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                      }`}
+                    >
+                      Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </a>
                 </div>
-                <div className="text-gold font-bold whitespace-nowrap">Worth {b.worth}</div>
-              </div>
-            ))}
+              );
+            })}
           </div>
-          <div className="mt-10 grid sm:grid-cols-3 gap-4 text-center">
-            <div className="bg-primary-foreground/10 rounded-xl p-5">
-              <div className="text-xs uppercase opacity-70 font-bold">Total Value</div>
-              <div className="text-2xl font-bold line-through opacity-70">₹7,800</div>
-            </div>
-            <div className="bg-primary-foreground/10 rounded-xl p-5">
-              <div className="text-xs uppercase opacity-70 font-bold">Regular Price</div>
-              <div className="text-2xl font-bold line-through opacity-70">₹999</div>
-            </div>
-            <div className="bg-gold text-gold-foreground rounded-xl p-5">
-              <div className="text-xs uppercase opacity-80 font-bold">Today's Offer</div>
-              <div className="text-3xl font-bold">₹99</div>
-            </div>
-          </div>
-          <div className="mt-10">
-            <a href="#register">
-              <Button size="lg" className="h-14 px-8 text-lg font-bold rounded-xl bg-gold text-gold-foreground hover:bg-gold/90">
-                Register Now at just ₹99 <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </a>
-          </div>
+          <p className="text-center text-sm font-medium opacity-80 mt-8">
+            <ShieldCheck className="inline h-4 w-4 mr-1" /> Secure payment via Razorpay · GST invoice · No lock-in
+          </p>
         </div>
       </Section>
 
       {/* Outcomes */}
       <Section>
-        <SectionTitle eyebrow="Transformation" title={<>What Will Change In Your Business <span className="text-primary">After The Workshop?</span></>} />
+        <SectionTitle eyebrow="What You Get" title={<>What Changes In <span className="text-primary">90 Days With Us</span></>} />
         <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-3">
           {outcomes.map((o) => (
             <div key={o} className="flex items-center gap-3 bg-card border border-border rounded-xl p-4 shadow-card">
@@ -349,15 +425,15 @@ function LandingPage() {
 
       {/* Testimonials */}
       <Section className="bg-secondary/40">
-        <SectionTitle eyebrow="Real Feedback" title={<>Feedback From Our <span className="text-primary">Previous Attendees</span></>} />
+        <SectionTitle eyebrow="Client Love" title={<>What Our <span className="text-primary">Clients Say</span></>} />
         <div className="max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {[
-            { name: "Rohan Sharma", biz: "Restaurant Owner, Pune", q: "Automated my WhatsApp orders in a week. Sales are up 40%." },
-            { name: "Dr. Meera Iyer", biz: "Dental Clinic, Mumbai", q: "Appointment no-shows dropped by half thanks to reminder automation." },
-            { name: "Aditi Verma", biz: "D2C Skincare, Delhi", q: "Green tick + catalog on WhatsApp = we closed 3x more orders." },
-            { name: "Kabir Malhotra", biz: "Coaching Institute", q: "Lead automation from Instagram saved my team 20 hours a week." },
-            { name: "Nisha Kapoor", biz: "Makeup Artist, Jaipur", q: "Bookings on autopilot. Best ₹99 I've ever spent." },
-            { name: "Vikram Rao", biz: "Real Estate, Bengaluru", q: "Qualified leads on WhatsApp — my closure rate went from 8% to 22%." },
+            { name: "Rohan Sharma", biz: "Restaurant Owner, Pune", q: "CurlyWave rebuilt our Instagram from scratch. Weekend footfall is up 60% in 4 months." },
+            { name: "Dr. Meera Iyer", biz: "Dental Clinic, Mumbai", q: "WhatsApp reminders + Google reviews — appointment no-shows dropped by half." },
+            { name: "Aditi Verma", biz: "D2C Skincare, Delhi", q: "Green tick + catalog + reels combo pushed us to 3x monthly orders." },
+            { name: "Kabir Malhotra", biz: "Coaching Institute", q: "Their lead-gen ads bring us 200+ qualified enquiries every month like clockwork." },
+            { name: "Nisha Kapoor", biz: "Makeup Artist, Jaipur", q: "Bookings on autopilot. Best decision I've made for my studio this year." },
+            { name: "Vikram Rao", biz: "Real Estate, Bengaluru", q: "Closure rate on WhatsApp leads went from 8% to 22%. Team is genuinely sharp." },
           ].map((t) => (
             <div key={t.name} className="bg-card border border-border rounded-2xl p-6 shadow-card">
               <div className="flex gap-1 mb-3">
@@ -378,14 +454,14 @@ function LandingPage() {
         </div>
       </Section>
 
-      {/* Meet Your Coach */}
+      {/* Meet Founder */}
       <Section>
-        <SectionTitle eyebrow="Your Mentor" title={<>Meet Your <span className="text-primary">Coach</span></>} />
+        <SectionTitle eyebrow="The Team" title={<>Meet Your <span className="text-primary">Growth Partner</span></>} />
         <div className="max-w-5xl mx-auto grid lg:grid-cols-[1fr_2fr] gap-10 items-center">
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 to-gold/30 rounded-3xl blur-2xl" />
             <div className="relative bg-card rounded-3xl p-2 border border-border shadow-card">
-              <img src={LOGO} alt="Coach" className="w-full aspect-square object-cover rounded-2xl" />
+              <img src={LOGO} alt="Founder" className="w-full aspect-square object-cover rounded-2xl" />
             </div>
           </div>
           <div>
@@ -393,8 +469,8 @@ function LandingPage() {
               {[
                 { icon: Award, t: "Founder — CurlyWave Media" },
                 { icon: Clock, t: "10+ Yrs Marketing Experience" },
-                { icon: Users, t: "Worked with 500+ Brands & MNCs" },
-                { icon: Bot, t: "Scaled 10,000+ Businesses on Automation" },
+                { icon: Users, t: "Worked With 500+ Brands & MNCs" },
+                { icon: Bot, t: "Scaled 10,000+ SMBs On Automation" },
               ].map((s) => (
                 <div key={s.t} className="flex items-center gap-3 bg-card border border-border rounded-xl p-3 shadow-card">
                   <s.icon className="h-5 w-5 text-primary flex-shrink-0" />
@@ -404,10 +480,10 @@ function LandingPage() {
             </div>
             <h3 className="text-2xl font-bold mb-3"><span className="text-primary">Abhinav Dubey</span> — Founder, CurlyWave Media & Automation Pvt. Ltd.</h3>
             <p className="text-muted-foreground font-medium mb-3">
-              A marketing professional with 10+ years of experience working with top MNCs and dynamic Indian startups. He's helped over 10,000 businesses scale with digital automation.
+              A marketing professional with 10+ years working with top MNCs and Indian startups. Abhinav leads a 25-person content, design and performance team focused on one thing — measurable growth for small and mid-sized brands.
             </p>
             <p className="text-muted-foreground font-medium">
-              His mission: help business owners like you grow revenue, improve customer engagement, and automate operations with technology and smart strategy.
+              Our promise: no jargon, no lock-ins, no vanity metrics. Just content that looks premium, ads that convert, and automation that works while you sleep.
             </p>
           </div>
         </div>
@@ -415,7 +491,7 @@ function LandingPage() {
 
       {/* Perfect For */}
       <Section className="bg-secondary/40">
-        <SectionTitle eyebrow="Audience" title={<>This Workshop Is <span className="text-primary">Perfect For…</span></>} />
+        <SectionTitle eyebrow="Who We Serve" title={<>Built For <span className="text-primary">Ambitious SMBs</span></>} />
         <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4">
           {perfectFor.map((p) => (
             <div key={p.label} className="bg-card border border-border rounded-2xl p-5 text-center shadow-card hover:-translate-y-1 transition">
@@ -444,19 +520,18 @@ function LandingPage() {
         </div>
       </Section>
 
-      {/* Register / Price + Countdown */}
-      <Section id="register" className="bg-primary text-primary-foreground scroll-mt-10">
+      {/* Contact / Lead form */}
+      <Section id="contact" className="bg-primary text-primary-foreground scroll-mt-10">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-gold text-gold-foreground px-3 py-1.5 rounded-full text-xs font-bold uppercase mb-4">
-              <Zap className="h-3.5 w-3.5" /> Limited Seats
+              <Zap className="h-3.5 w-3.5" /> Only 5 Slots Left This Month
             </div>
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4">Reserve Your Seat Now</h2>
-            <div className="flex items-baseline gap-4 mb-6">
-              <span className="text-6xl font-bold text-gold">₹99</span>
-              <span className="text-2xl line-through opacity-60">₹999</span>
-            </div>
-            <p className="mb-4 font-semibold opacity-90">Offer Expires In:</p>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">Book Your Free Strategy Call</h2>
+            <p className="mb-6 font-semibold opacity-90 max-w-md">
+              A 20-minute audit of your Instagram, Facebook & WhatsApp — with a custom growth plan you can keep, even if you don't sign up.
+            </p>
+            <p className="mb-4 font-semibold opacity-90">Offer expires in:</p>
             <div className="grid grid-cols-4 gap-3 max-w-md">
               {[
                 { v: d, l: "Days" }, { v: h, l: "Hours" }, { v: m, l: "Minutes" }, { v: s, l: "Seconds" },
@@ -473,8 +548,8 @@ function LandingPage() {
             onSubmit={onSubmit}
             className="bg-card text-foreground rounded-2xl p-6 sm:p-8 shadow-card border border-border"
           >
-            <h3 className="text-2xl font-bold mb-1">Register Now</h3>
-            <p className="text-sm text-muted-foreground font-medium mb-6">Fill in your details to lock your seat.</p>
+            <h3 className="text-2xl font-bold mb-1">Talk To Our Growth Team</h3>
+            <p className="text-sm text-muted-foreground font-medium mb-6">Fill in your details — we'll call you within 24 hours.</p>
             <div className="space-y-4">
               <div>
                 <Label htmlFor="name" className="font-bold">Full Name</Label>
@@ -489,14 +564,28 @@ function LandingPage() {
                 <Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+91 98xxxxxxxx" className="h-12 mt-1.5" />
               </div>
               <div>
-                <Label htmlFor="biz" className="font-bold">Business Type (optional)</Label>
+                <Label htmlFor="biz" className="font-bold">Business Type</Label>
                 <Input id="biz" value={form.business} onChange={(e) => setForm({ ...form, business: e.target.value })} placeholder="Restaurant, Clinic, D2C, etc." className="h-12 mt-1.5" />
               </div>
+              <div>
+                <Label htmlFor="plan" className="font-bold">Interested Plan</Label>
+                <select
+                  id="plan"
+                  value={form.plan}
+                  onChange={(e) => setForm({ ...form, plan: e.target.value })}
+                  className="w-full h-12 mt-1.5 rounded-md border border-input bg-background px-3 font-semibold"
+                >
+                  <option>Starter — ₹499/mo</option>
+                  <option>Growth — ₹999/mo</option>
+                  <option>Business — ₹5,999/mo</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
               <Button type="submit" size="lg" className="w-full h-14 text-lg font-bold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90">
-                Pay ₹99 & Register <ArrowRight className="ml-2 h-5 w-5" />
+                Request My Free Audit <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <p className="text-xs text-center text-muted-foreground font-medium">
-                <ShieldCheck className="inline h-3.5 w-3.5 mr-1" /> Secure payment via Razorpay. 100% safe.
+                <ShieldCheck className="inline h-3.5 w-3.5 mr-1" /> Your details are safe. No spam, ever.
               </p>
             </div>
           </form>
