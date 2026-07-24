@@ -50,9 +50,10 @@ function useCountdown(minutes: number) {
   return { d, h, m, s };
 }
 
-function Section({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <section className={`px-4 sm:px-6 py-14 sm:py-20 ${className}`}>{children}</section>;
+function Section({ children, className = "", id }: { children: React.ReactNode; className?: string; id?: string }) {
+  return <section id={id} className={`px-4 sm:px-6 py-14 sm:py-20 ${className}`}>{children}</section>;
 }
+
 
 function SectionTitle({ eyebrow, title }: { eyebrow?: string; title: React.ReactNode }) {
   return (
