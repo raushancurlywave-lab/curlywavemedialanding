@@ -8,6 +8,7 @@ import {
   Camera, PenTool, BarChart3, Megaphone, Video, Target,
 } from "lucide-react";
 import logoAsset from "@/assets/curlywave-logo.jpeg.asset.json";
+import demoVideo from "@/assets/curlywave-demo.mp4.asset.json";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -240,17 +241,23 @@ function LandingPage() {
                 <span className="h-3 w-3 rounded-full bg-gold" />
                 <span className="h-3 w-3 rounded-full bg-primary" />
               </div>
-              <div className="aspect-video bg-gradient-to-br from-primary/20 via-secondary to-gold/20 flex items-center justify-center relative">
-                <button className="h-20 w-20 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-glow hover:scale-105 transition">
-                  <PlayCircle className="h-12 w-12" />
-                </button>
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-semibold">
-                  <span className="bg-card/90 backdrop-blur px-3 py-1.5 rounded-full">See client results (90s)</span>
+              <div className="aspect-video bg-secondary relative">
+                <video
+                  src={demoVideo.url}
+                  controls
+                  playsInline
+                  muted
+                  autoPlay
+                  loop
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute bottom-4 right-4 text-xs font-semibold pointer-events-none">
                   <span className="bg-primary text-primary-foreground px-3 py-1.5 rounded-full flex items-center gap-1">
                     <TrendingUp className="h-3.5 w-3.5" /> +312% Reach
                   </span>
                 </div>
               </div>
+
             </div>
           </motion.div>
         </div>
