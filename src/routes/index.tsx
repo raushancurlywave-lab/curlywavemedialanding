@@ -11,6 +11,17 @@ import logoAsset from "@/assets/curlywave-logo.jpeg.asset.json";
 import demoVideo from "@/assets/curlywave-demo.mp4.asset.json";
 import demoVideoWebm from "@/assets/curlywave-demo.webm.asset.json";
 import demoPoster from "@/assets/curlywave-poster.jpg.asset.json";
+import work1 from "@/assets/work-1.png.asset.json";
+import work2 from "@/assets/work-2.jpg.asset.json";
+import work3 from "@/assets/work-3.jpg.asset.json";
+import work4 from "@/assets/work-4.jpg.asset.json";
+
+const WORK = [
+  { src: work1.url, alt: "CurlyWave social media management plan creative" },
+  { src: work2.url, alt: "Video ads campaign creative" },
+  { src: work3.url, alt: "Client review creative with 5 star rating" },
+  { src: work4.url, alt: "UGC ads creative with 1000+ creators" },
+];
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -360,6 +371,26 @@ function LandingPage() {
           </div>
         </div>
       </Section>
+
+      {/* Our Work */}
+      <Section id="work">
+        <SectionTitle eyebrow="Our Work" title={<>Creatives We <span className="text-primary">Actually Ship</span></>} />
+        <div className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {WORK.map((w, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
+            >
+              <img src={w.src} alt={w.alt} loading="lazy" className="w-full h-full object-cover aspect-[4/5]" />
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
 
       {/* Why Us */}
       <Section>
