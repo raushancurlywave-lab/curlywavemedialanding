@@ -29,6 +29,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const SITE_URL = "https://curlywavemedialanding.lovable.app";
 
@@ -198,16 +199,32 @@ function CTAButton({ label = "Book Free Strategy Call", full = false }: { label?
 
 function LandingPage() {
   const { d, h, m, s } = useCountdown(60 * 24 * 3);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", business: "", plan: "Growth" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", business: "", plan: "Growth — ₹999/mo" });
+  const [submitting, setSubmitting] = useState(false);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.phone) {
+    if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) {
       toast.error("Please fill in name, email and phone.");
       return;
     }
+    setSubmitting(true);
+    const { error } = await supabase.from("leads").insert({
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim(),
+      business: form.business.trim() || null,
+      plan: form.plan,
+    });
+    setSubmitting(false);
+    if (error) {
+      toast.error("Could not send your details. Please try again or WhatsApp us.");
+      return;
+    }
     toast.success("Thanks! Our team will call you within 24 hours.");
+    setForm({ name: "", email: "", phone: "", business: "", plan: "Growth — ₹999/mo" });
   };
+
 
   const services = [
     { icon: Instagram, title: "Instagram Management", desc: "Daily posting, reels, stories, hashtag strategy and DM handling that grows real followers." },
@@ -762,8 +779,8 @@ function LandingPage() {
                   <option>Not sure yet</option>
                 </select>
               </div>
-              <Button type="submit" size="lg" className="w-full h-14 text-lg font-bold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90">
-                Request My Free Audit <ArrowRight className="ml-2 h-5 w-5" />
+              <Button type="submit" size="lg" disabled={submitting} className="w-full h-14 text-lg font-bold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90">
+                {submitting ? "Sending..." : <>Request My Free Audit <ArrowRight className="ml-2 h-5 w-5" /></>}
               </Button>
               <p className="text-xs text-center text-muted-foreground font-medium">
                 <ShieldCheck className="inline h-3.5 w-3.5 mr-1" /> Your details are safe. No spam, ever.
