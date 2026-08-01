@@ -26,11 +26,11 @@ export const Route = createFileRoute("/")({
         content:
           "CurlyWave Media & Automation Pvt. Ltd. — done-for-you Instagram, Facebook & WhatsApp management. Plans from ₹499/mo. Book a free strategy call.",
       },
-      { property: "og:title", content: "CurlyWave Media — Social Media Management Agency" },
-      { property: "og:description", content: "Done-for-you social media, content & WhatsApp automation. Plans starting ₹499/mo." },
+      { property: "og:title", content: "CurlyWave Media — Social Media Management Plans" },
+      { property: "og:description", content: "A young startup running your Instagram & Facebook end-to-end. Social media management plans from ₹499/mo." },
       { property: "og:url", content: "/" },
-      { name: "twitter:title", content: "CurlyWave Media — Social Media Management Agency" },
-      { name: "twitter:description", content: "Done-for-you social media & WhatsApp automation. From ₹499/mo." },
+      { name: "twitter:title", content: "CurlyWave Media — Social Media Management Plans" },
+      { name: "twitter:description", content: "Social media management plans from ₹499/mo. Built by a startup, for startups." },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
@@ -142,46 +142,76 @@ function LandingPage() {
     {
       name: "Starter",
       price: 499,
-      tagline: "For solopreneurs testing the waters",
+      tagline: "For solopreneurs starting their page",
       badge: null,
+      details: [
+        { label: "Platforms", value: "1 (Instagram or Facebook)" },
+        { label: "Static posts", value: "8 / month" },
+        { label: "Reels", value: "4 / month (from your clips)" },
+        { label: "Stories", value: "8 / month" },
+        { label: "Content calendar", value: "Monthly, approved by you" },
+        { label: "Reporting", value: "Monthly growth report" },
+        { label: "Support", value: "Email, 48h response" },
+      ],
       features: [
         "1 platform (Instagram or Facebook)",
-        "8 posts / month",
-        "4 reels / month",
-        "Caption + hashtag strategy",
-        "Basic monthly report",
-        "Email support",
+        "8 posts + 4 reels + 8 stories / month",
+        "Captions, hashtags & posting handled",
+        "Monthly content calendar for approval",
+        "Profile / bio optimisation",
+        "Monthly growth report",
       ],
     },
     {
       name: "Growth",
       price: 999,
-      tagline: "Most-loved plan for growing brands",
+      tagline: "Most-loved plan for growing pages",
       badge: "Most Popular",
+      details: [
+        { label: "Platforms", value: "2 (Instagram + Facebook)" },
+        { label: "Static posts", value: "20 / month" },
+        { label: "Reels", value: "12 / month (edited by us)" },
+        { label: "Stories", value: "20 / month" },
+        { label: "Engagement", value: "Comment & DM replies, daily" },
+        { label: "Content calendar", value: "Bi-weekly planning call" },
+        { label: "Reporting", value: "Weekly performance report" },
+        { label: "Support", value: "WhatsApp, same-day" },
+      ],
       features: [
-        "2 platforms (IG + FB)",
-        "20 posts + 12 reels / month",
-        "WhatsApp catalog setup",
-        "Story & DM management",
+        "2 platforms (Instagram + Facebook)",
+        "20 posts + 12 reels + 20 stories / month",
+        "Daily comment & DM management",
+        "Trend-based reel scripting & editing",
+        "Hashtag + posting-time strategy",
         "Weekly performance report",
-        "Priority WhatsApp support",
       ],
     },
     {
       name: "Business",
       price: 5999,
-      tagline: "Fully done-for-you growth engine",
-      badge: "Best ROI",
+      tagline: "Full social media desk for your brand",
+      badge: "Best Value",
+      details: [
+        { label: "Platforms", value: "Instagram + Facebook + 1 more (LinkedIn / YouTube Shorts)" },
+        { label: "Static posts", value: "30+ / month" },
+        { label: "Reels", value: "20+ / month, custom shot list" },
+        { label: "Stories", value: "Daily" },
+        { label: "Engagement", value: "Full inbox & comment handling" },
+        { label: "Extras", value: "Monthly content shoot day" },
+        { label: "Reporting", value: "Weekly report + live dashboard" },
+        { label: "Support", value: "Dedicated manager, WhatsApp group" },
+      ],
       features: [
-        "IG + FB + WhatsApp + Google",
-        "30+ posts, 20+ reels, on-location shoots",
-        "Meta & Google Ads management",
-        "WhatsApp Green Tick + chatbot",
-        "Dedicated account manager",
-        "Weekly strategy calls + live dashboard",
+        "3 platforms managed end-to-end",
+        "30+ posts, 20+ reels, daily stories",
+        "Monthly content shoot day",
+        "Full inbox, comment & DM handling",
+        "Dedicated social media manager",
+        "Weekly strategy call + live dashboard",
       ],
     },
   ];
+
 
   const faqs = [
     { q: "How soon do you start after I sign up?", a: "Onboarding takes 48 hours. You'll get a dedicated WhatsApp group, brand questionnaire and content calendar within 3 working days." },
@@ -205,7 +235,7 @@ function LandingPage() {
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-bold text-sm mb-6 shadow-glow">
-              <Sparkles className="h-4 w-4" /> Social Media Management Agency
+              <Sparkles className="h-4 w-4" /> A Startup Doing Social Media Management
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
               We Grow Your <span className="text-primary">Instagram</span>, <span className="text-primary">Facebook</span> & <span className="text-primary">WhatsApp</span> — So You Can Focus On Running The Business
@@ -416,6 +446,43 @@ function LandingPage() {
         </div>
       </Section>
 
+      {/* PLAN DETAILS */}
+      <Section id="plan-details">
+        <SectionTitle
+          eyebrow="Every Detail, In Writing"
+          title={<>What's Inside Each <span className="text-primary">Plan</span></>}
+        />
+        <p className="text-center text-muted-foreground font-medium max-w-2xl mx-auto -mt-6 mb-10">
+          Only social media management — no vague retainers, no hidden add-ons. This is exactly what we deliver every month.
+        </p>
+
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-6">
+          {plans.map((p) => (
+            <div key={p.name} className="bg-card border border-border rounded-2xl shadow-card overflow-hidden">
+              <div className="bg-secondary px-6 py-5 border-b border-border">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="text-xl font-bold">{p.name}</h3>
+                  <span className="text-lg font-bold text-primary">₹{p.price.toLocaleString("en-IN")}<span className="text-sm font-semibold text-muted-foreground">/mo</span></span>
+                </div>
+                <p className="text-sm font-medium text-muted-foreground mt-1">{p.tagline}</p>
+              </div>
+              <dl className="divide-y divide-border">
+                {p.details.map((d) => (
+                  <div key={d.label} className="px-6 py-3 flex gap-4 justify-between items-start">
+                    <dt className="text-sm font-bold text-muted-foreground whitespace-nowrap">{d.label}</dt>
+                    <dd className="text-sm font-semibold text-right">{d.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+        </div>
+        <p className="text-center text-sm font-medium text-muted-foreground mt-8 max-w-3xl mx-auto">
+          Every plan includes account setup, content approval before publishing, and monthly reporting. Ad spend, if you choose to run ads, is always paid directly by you to Meta.
+        </p>
+      </Section>
+
+
       {/* Outcomes */}
       <Section>
         <SectionTitle eyebrow="What You Get" title={<>What Changes In <span className="text-primary">90 Days With Us</span></>} />
@@ -487,7 +554,7 @@ function LandingPage() {
             </div>
             <h3 className="text-2xl font-bold mb-3"><span className="text-primary">Abhinav Dubey</span> — Founder, CurlyWave Media & Automation Pvt. Ltd.</h3>
             <p className="text-muted-foreground font-medium mb-3">
-              A marketing professional with 10+ years working with top MNCs and Indian startups. Abhinav leads a 25-person content, design and performance team focused on one thing — measurable growth for small and mid-sized brands.
+              A marketing professional with 10+ years working with top MNCs and Indian startups. CurlyWave is his own young startup — a small, hands-on team that treats every brand's page like its own, with one focus: measurable growth.
             </p>
             <p className="text-muted-foreground font-medium">
               Our promise: no jargon, no lock-ins, no vanity metrics. Just content that looks premium, ads that convert, and automation that works while you sleep.
