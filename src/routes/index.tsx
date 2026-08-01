@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import logoAsset from "@/assets/curlywave-logo.jpeg.asset.json";
 import demoVideo from "@/assets/curlywave-demo.mp4.asset.json";
+import demoVideoWebm from "@/assets/curlywave-demo.webm.asset.json";
+import demoPoster from "@/assets/curlywave-poster.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
