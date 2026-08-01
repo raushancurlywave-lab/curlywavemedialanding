@@ -19,27 +19,70 @@ import {
 } from "@/components/ui/accordion";
 import { toast } from "sonner";
 
+const SITE_URL = "https://curlywavemedialanding.lovable.app";
+
+const FAQS = [
+  { q: "How soon do you start after I sign up?", a: "Onboarding takes 48 hours. You'll get a dedicated WhatsApp group, brand questionnaire and content calendar within 3 working days." },
+  { q: "Do I need to give access to my accounts?", a: "Yes — we use secure Meta Business Suite access. You stay the owner at all times; we never change passwords." },
+  { q: "Is there a lock-in contract?", a: "No lock-in. Plans are billed monthly and you can pause or cancel anytime with 7 days notice." },
+  { q: "Do you handle ads budget separately?", a: "Yes. Management fee is what you see; the ad spend goes directly to Meta/Google from your card and is fully transparent." },
+  { q: "Which cities do you serve?", a: "We serve clients across India. On-location shoots (Business plan) are available in top 10 metros; other cities on request." },
+  { q: "How do I pay?", a: "Secure payments via Razorpay — UPI, cards, netbanking. GST invoice provided every month." },
+];
+
+const PAGE_TITLE = "CurlyWave Media — Social Media Management Plans";
+const PAGE_DESC =
+  "Done-for-you Instagram, Facebook & WhatsApp management by CurlyWave Media. Plans from ₹499/mo. Book a free strategy call.";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CurlyWave Media — Social Media Management & Automation for Growing Brands" },
-      {
-        name: "description",
-        content:
-          "CurlyWave Media & Automation Pvt. Ltd. — done-for-you Instagram, Facebook & WhatsApp management. Plans from ₹499/mo. Book a free strategy call.",
-      },
-      { property: "og:title", content: "CurlyWave Media — Social Media Management & Automation for Growing Brands" },
-      { property: "og:description", content: "CurlyWave Media & Automation Pvt. Ltd. — done-for-you Instagram, Facebook & WhatsApp management. Plans from ₹499/mo. Book a free strategy call." },
-      { property: "og:url", content: "/" },
-      { name: "twitter:title", content: "CurlyWave Media — Social Media Management & Automation for Growing Brands" },
-      { name: "twitter:description", content: "CurlyWave Media & Automation Pvt. Ltd. — done-for-you Instagram, Facebook & WhatsApp management. Plans from ₹499/mo. Book a free strategy call." },
+      { title: PAGE_TITLE },
+      { name: "description", content: PAGE_DESC },
+      { property: "og:title", content: PAGE_TITLE },
+      { property: "og:description", content: PAGE_DESC },
+      { property: "og:url", content: SITE_URL + "/" },
+      { name: "twitter:title", content: PAGE_TITLE },
+      { name: "twitter:description", content: PAGE_DESC },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: SITE_URL + "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Social Media Management & Automation",
+          serviceType: "Social media management",
+          provider: { "@type": "Organization", name: "CurlyWave Media & Automation Pvt. Ltd.", url: SITE_URL },
+          areaServed: "IN",
+          description: PAGE_DESC,
+          offers: [
+            { "@type": "Offer", name: "Starter Plan", price: "499", priceCurrency: "INR" },
+            { "@type": "Offer", name: "Growth Plan", price: "999", priceCurrency: "INR" },
+            { "@type": "Offer", name: "Business Plan", price: "5999", priceCurrency: "INR" },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+    ],
   }),
   component: LandingPage,
 });
 
 const LOGO = logoAsset.url;
+
 
 function useCountdown(minutes: number) {
   const [remaining, setRemaining] = useState(minutes * 60);
@@ -215,14 +258,8 @@ function LandingPage() {
   ];
 
 
-  const faqs = [
-    { q: "How soon do you start after I sign up?", a: "Onboarding takes 48 hours. You'll get a dedicated WhatsApp group, brand questionnaire and content calendar within 3 working days." },
-    { q: "Do I need to give access to my accounts?", a: "Yes — we use secure Meta Business Suite access. You stay the owner at all times; we never change passwords." },
-    { q: "Is there a lock-in contract?", a: "No lock-in. Plans are billed monthly and you can pause or cancel anytime with 7 days notice." },
-    { q: "Do you handle ads budget separately?", a: "Yes. Management fee is what you see; the ad spend goes directly to Meta/Google from your card and is fully transparent." },
-    { q: "Which cities do you serve?", a: "We serve clients across India. On-location shoots (Business plan) are available in top 10 metros; other cities on request." },
-    { q: "How do I pay?", a: "Secure payments via Razorpay — UPI, cards, netbanking. GST invoice provided every month." },
-  ];
+  const faqs = FAQS;
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">

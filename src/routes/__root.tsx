@@ -82,14 +82,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "CurlyWave Media" },
       { name: "twitter:card", content: "summary_large_image" },
-      { title: "CurlyWave Media — Social Media Management & Automation for Growing Brands" },
-      { property: "og:title", content: "CurlyWave Media — Social Media Management & Automation for Growing Brands" },
-      { name: "twitter:title", content: "CurlyWave Media — Social Media Management & Automation for Growing Brands" },
+      { title: "CurlyWave Media — Social Media Growth & Automation" },
+      { property: "og:title", content: "CurlyWave Media — Social Media Growth & Automation" },
+      { name: "twitter:title", content: "CurlyWave Media — Social Media Growth & Automation" },
       { name: "description", content: "CurlyWave Media & Automation Pvt. Ltd. — done-for-you Instagram, Facebook & WhatsApp management. Plans from ₹499/mo. Book a free strategy call." },
       { property: "og:description", content: "CurlyWave Media & Automation Pvt. Ltd. — done-for-you Instagram, Facebook & WhatsApp management. Plans from ₹499/mo. Book a free strategy call." },
       { name: "twitter:description", content: "CurlyWave Media & Automation Pvt. Ltd. — done-for-you Instagram, Facebook & WhatsApp management. Plans from ₹499/mo. Book a free strategy call." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6cad3d13-f42b-4d53-8241-e8bbf0a12f6a" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6cad3d13-f42b-4d53-8241-e8bbf0a12f6a" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "CurlyWave Media & Automation Pvt. Ltd.",
+          alternateName: "CurlyWave Media",
+          url: "https://curlywavemedialanding.lovable.app",
+          logo: "https://curlywavemedialanding.lovable.app/__l5e/assets-v1/359cac90-5dd8-4524-a4b9-86daad5075d9/curlywave-logo.jpeg",
+          description:
+            "CurlyWave Media & Automation Pvt. Ltd. provides done-for-you social media management and automation for growing brands in India.",
+        }),
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -101,6 +116,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap",
       },
     ],
+
   }),
   shellComponent: RootShell,
   component: RootComponent,
