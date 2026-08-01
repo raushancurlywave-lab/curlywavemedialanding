@@ -5,7 +5,7 @@ import {
   Bell, PlayCircle, Check, MessageCircle, ShieldCheck, TrendingUp, DollarSign, Bot,
   Instagram, Facebook, Star, Search, Award, Zap, Users, Store, Stethoscope, UtensilsCrossed,
   GraduationCap, ShoppingBag, User, Palette, Home, Trophy, ArrowRight, Sparkles, Clock,
-  Camera, PenTool, BarChart3, Megaphone, Video, Target,
+  Camera, PenTool, BarChart3, Megaphone, Video, Target, Play,
 } from "lucide-react";
 import logoAsset from "@/assets/curlywave-logo.jpeg.asset.json";
 import demoVideo from "@/assets/curlywave-demo.mp4.asset.json";
