@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Bell, PlayCircle, Check, MessageCircle, ShieldCheck, TrendingUp, DollarSign, Bot,
   Instagram, Facebook, Star, Search, Award, Zap, Users, Store, Stethoscope, UtensilsCrossed,
   GraduationCap, ShoppingBag, User, Palette, Home, Trophy, ArrowRight, Sparkles, Clock,
-  Camera, PenTool, BarChart3, Megaphone, Video, Target,
+  Camera, PenTool, BarChart3, Megaphone, Video, Target, Play,
 } from "lucide-react";
 import logoAsset from "@/assets/curlywave-logo.jpeg.asset.json";
 import demoVideo from "@/assets/curlywave-demo.mp4.asset.json";
@@ -93,6 +93,63 @@ export const Route = createFileRoute("/")({
 });
 
 const LOGO = logoAsset.url;
+
+function HeroVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    v.muted = true;
+    const tryPlay = () => {
+      v.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    };
+    tryPlay();
+    v.addEventListener("loadeddata", tryPlay);
+    return () => v.removeEventListener("loadeddata", tryPlay);
+  }, []);
+
+  const handleTap = () => {
+    const v = ref.current;
+    if (!v) return;
+    if (v.paused) v.play().then(() => setPlaying(true)).catch(() => {});
+    else { v.pause(); setPlaying(false); }
+  };
+
+  return (
+    <>
+      <video
+        ref={ref}
+        poster={demoPoster.url}
+        controls
+        playsInline
+        muted
+        autoPlay
+        loop
+        preload="auto"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        className="h-full w-full object-cover"
+      >
+        <source src={demoVideoWebm.url} type="video/webm" />
+        <source src={demoVideo.url} type="video/mp4" />
+      </video>
+      {!playing && (
+        <button
+          type="button"
+          onClick={handleTap}
+          aria-label="Play video"
+          className="absolute inset-0 flex items-center justify-center bg-foreground/20"
+        >
+          <span className="h-16 w-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-card">
+            <Play className="h-7 w-7 ml-0.5" />
+          </span>
+        </button>
+      )}
+    </>
+  );
+}
 
 
 function useCountdown(minutes: number) {
@@ -322,19 +379,7 @@ function LandingPage() {
                 <span className="h-3 w-3 rounded-full bg-primary" />
               </div>
               <div className="aspect-video bg-secondary relative">
-                <video
-                  poster={demoPoster.url}
-                  controls
-                  playsInline
-                  muted
-                  autoPlay
-                  loop
-                  preload="metadata"
-                  className="h-full w-full object-cover"
-                >
-                  <source src={demoVideoWebm.url} type="video/webm" />
-                  <source src={demoVideo.url} type="video/mp4" />
-                </video>
+                <HeroVideo />
                 <div className="absolute bottom-4 right-4 text-xs font-semibold pointer-events-none">
                   <span className="bg-primary text-primary-foreground px-3 py-1.5 rounded-full flex items-center gap-1">
                     <TrendingUp className="h-3.5 w-3.5" /> +312% Reach
