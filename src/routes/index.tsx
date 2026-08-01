@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Bell, PlayCircle, Check, MessageCircle, ShieldCheck, TrendingUp, DollarSign, Bot,
   Instagram, Facebook, Star, Search, Award, Zap, Users, Store, Stethoscope, UtensilsCrossed,
@@ -322,19 +322,7 @@ function LandingPage() {
                 <span className="h-3 w-3 rounded-full bg-primary" />
               </div>
               <div className="aspect-video bg-secondary relative">
-                <video
-                  poster={demoPoster.url}
-                  controls
-                  playsInline
-                  muted
-                  autoPlay
-                  loop
-                  preload="metadata"
-                  className="h-full w-full object-cover"
-                >
-                  <source src={demoVideoWebm.url} type="video/webm" />
-                  <source src={demoVideo.url} type="video/mp4" />
-                </video>
+                <HeroVideo />
                 <div className="absolute bottom-4 right-4 text-xs font-semibold pointer-events-none">
                   <span className="bg-primary text-primary-foreground px-3 py-1.5 rounded-full flex items-center gap-1">
                     <TrendingUp className="h-3.5 w-3.5" /> +312% Reach
