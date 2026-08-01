@@ -446,6 +446,40 @@ function LandingPage() {
         </div>
       </Section>
 
+      {/* PLAN DETAILS */}
+      <Section id="plan-details">
+        <SectionTitle
+          eyebrow="Every Detail, In Writing"
+          title={<>What's Inside Each <span className="text-primary">Plan</span></>}
+          sub="Only social media management — no vague retainers, no hidden add-ons. This is exactly what we deliver every month."
+        />
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-6">
+          {plans.map((p) => (
+            <div key={p.name} className="bg-card border border-border rounded-2xl shadow-card overflow-hidden">
+              <div className="bg-secondary px-6 py-5 border-b border-border">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="text-xl font-bold">{p.name}</h3>
+                  <span className="text-lg font-bold text-primary">₹{p.price.toLocaleString("en-IN")}<span className="text-sm font-semibold text-muted-foreground">/mo</span></span>
+                </div>
+                <p className="text-sm font-medium text-muted-foreground mt-1">{p.tagline}</p>
+              </div>
+              <dl className="divide-y divide-border">
+                {p.details.map((d) => (
+                  <div key={d.label} className="px-6 py-3 flex gap-4 justify-between items-start">
+                    <dt className="text-sm font-bold text-muted-foreground whitespace-nowrap">{d.label}</dt>
+                    <dd className="text-sm font-semibold text-right">{d.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+        </div>
+        <p className="text-center text-sm font-medium text-muted-foreground mt-8 max-w-3xl mx-auto">
+          Every plan includes account setup, content approval before publishing, and monthly reporting. Ad spend, if you choose to run ads, is always paid directly by you to Meta.
+        </p>
+      </Section>
+
+
       {/* Outcomes */}
       <Section>
         <SectionTitle eyebrow="What You Get" title={<>What Changes In <span className="text-primary">90 Days With Us</span></>} />
