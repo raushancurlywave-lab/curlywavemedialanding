@@ -235,7 +235,7 @@ function LandingPage() {
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-bold text-sm mb-6 shadow-glow">
-              <Sparkles className="h-4 w-4" /> Social Media Management Agency
+              <Sparkles className="h-4 w-4" /> A Startup Doing Social Media Management
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
               We Grow Your <span className="text-primary">Instagram</span>, <span className="text-primary">Facebook</span> & <span className="text-primary">WhatsApp</span> — So You Can Focus On Running The Business
