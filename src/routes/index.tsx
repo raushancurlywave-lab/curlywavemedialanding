@@ -121,7 +121,6 @@ function HeroVideo() {
     <>
       <video
         ref={ref}
-        src={demoVideo.url}
         poster={demoPoster.url}
         controls
         playsInline
@@ -133,8 +132,8 @@ function HeroVideo() {
         onPause={() => setPlaying(false)}
         className="h-full w-full object-cover"
       >
-        <source src={demoVideo.url} type="video/mp4" />
         <source src={demoVideoWebm.url} type="video/webm" />
+        <source src={demoVideo.url} type="video/mp4" />
       </video>
       {!playing && (
         <button
