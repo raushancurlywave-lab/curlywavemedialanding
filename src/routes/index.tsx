@@ -275,14 +275,18 @@ function LandingPage() {
               </div>
               <div className="aspect-video bg-secondary relative">
                 <video
-                  src={demoVideo.url}
+                  poster={demoPoster.url}
                   controls
                   playsInline
                   muted
                   autoPlay
                   loop
+                  preload="metadata"
                   className="h-full w-full object-cover"
-                />
+                >
+                  <source src={demoVideoWebm.url} type="video/webm" />
+                  <source src={demoVideo.url} type="video/mp4" />
+                </video>
                 <div className="absolute bottom-4 right-4 text-xs font-semibold pointer-events-none">
                   <span className="bg-primary text-primary-foreground px-3 py-1.5 rounded-full flex items-center gap-1">
                     <TrendingUp className="h-3.5 w-3.5" /> +312% Reach
