@@ -779,8 +779,8 @@ function LandingPage() {
                   <option>Not sure yet</option>
                 </select>
               </div>
-              <Button type="submit" size="lg" className="w-full h-14 text-lg font-bold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90">
-                Request My Free Audit <ArrowRight className="ml-2 h-5 w-5" />
+              <Button type="submit" size="lg" disabled={submitting} className="w-full h-14 text-lg font-bold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90">
+                {submitting ? "Sending..." : <>Request My Free Audit <ArrowRight className="ml-2 h-5 w-5" /></>}
               </Button>
               <p className="text-xs text-center text-muted-foreground font-medium">
                 <ShieldCheck className="inline h-3.5 w-3.5 mr-1" /> Your details are safe. No spam, ever.
