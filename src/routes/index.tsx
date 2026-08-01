@@ -198,16 +198,32 @@ function CTAButton({ label = "Book Free Strategy Call", full = false }: { label?
 
 function LandingPage() {
   const { d, h, m, s } = useCountdown(60 * 24 * 3);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", business: "", plan: "Growth" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", business: "", plan: "Growth — ₹999/mo" });
+  const [submitting, setSubmitting] = useState(false);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.phone) {
+    if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) {
       toast.error("Please fill in name, email and phone.");
       return;
     }
+    setSubmitting(true);
+    const { error } = await supabase.from("leads").insert({
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim(),
+      business: form.business.trim() || null,
+      plan: form.plan,
+    });
+    setSubmitting(false);
+    if (error) {
+      toast.error("Could not send your details. Please try again or WhatsApp us.");
+      return;
+    }
     toast.success("Thanks! Our team will call you within 24 hours.");
+    setForm({ name: "", email: "", phone: "", business: "", plan: "Growth — ₹999/mo" });
   };
+
 
   const services = [
     { icon: Instagram, title: "Instagram Management", desc: "Daily posting, reels, stories, hashtag strategy and DM handling that grows real followers." },
