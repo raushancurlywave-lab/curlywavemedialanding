@@ -94,6 +94,64 @@ export const Route = createFileRoute("/")({
 
 const LOGO = logoAsset.url;
 
+function HeroVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    v.muted = true;
+    const tryPlay = () => {
+      v.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    };
+    tryPlay();
+    v.addEventListener("loadeddata", tryPlay);
+    return () => v.removeEventListener("loadeddata", tryPlay);
+  }, []);
+
+  const handleTap = () => {
+    const v = ref.current;
+    if (!v) return;
+    if (v.paused) v.play().then(() => setPlaying(true)).catch(() => {});
+    else { v.pause(); setPlaying(false); }
+  };
+
+  return (
+    <>
+      <video
+        ref={ref}
+        src={demoVideo.url}
+        poster={demoPoster.url}
+        controls
+        playsInline
+        muted
+        autoPlay
+        loop
+        preload="auto"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        className="h-full w-full object-cover"
+      >
+        <source src={demoVideo.url} type="video/mp4" />
+        <source src={demoVideoWebm.url} type="video/webm" />
+      </video>
+      {!playing && (
+        <button
+          type="button"
+          onClick={handleTap}
+          aria-label="Play video"
+          className="absolute inset-0 flex items-center justify-center bg-foreground/20"
+        >
+          <span className="h-16 w-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-card">
+            <Play className="h-7 w-7 ml-0.5" />
+          </span>
+        </button>
+      )}
+    </>
+  );
+}
+
 
 function useCountdown(minutes: number) {
   const [remaining, setRemaining] = useState(minutes * 60);
