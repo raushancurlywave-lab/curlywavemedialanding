@@ -517,7 +517,7 @@ function LandingPage() {
             </div>
             <h3 className="text-2xl font-bold mb-3"><span className="text-primary">Abhinav Dubey</span> — Founder, CurlyWave Media & Automation Pvt. Ltd.</h3>
             <p className="text-muted-foreground font-medium mb-3">
-              A marketing professional with 10+ years working with top MNCs and Indian startups. Abhinav leads a 25-person content, design and performance team focused on one thing — measurable growth for small and mid-sized brands.
+              A marketing professional with 10+ years working with top MNCs and Indian startups. CurlyWave is his own young startup — a small, hands-on team that treats every brand's page like its own, with one focus: measurable growth.
             </p>
             <p className="text-muted-foreground font-medium">
               Our promise: no jargon, no lock-ins, no vanity metrics. Just content that looks premium, ads that convert, and automation that works while you sleep.
