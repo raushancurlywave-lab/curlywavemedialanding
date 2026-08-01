@@ -534,40 +534,28 @@ function LandingPage() {
         </div>
       </Section>
 
-      {/* Meet Founder */}
+      {/* About the team */}
       <Section>
-        <SectionTitle eyebrow="The Team" title={<>Meet Your <span className="text-primary">Growth Partner</span></>} />
-        <div className="max-w-5xl mx-auto grid lg:grid-cols-[1fr_2fr] gap-10 items-center">
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 to-gold/30 rounded-3xl blur-2xl" />
-            <div className="relative bg-card rounded-3xl p-2 border border-border shadow-card">
-              <img src={LOGO} alt="Founder" className="w-full aspect-square object-cover rounded-2xl" />
+        <SectionTitle eyebrow="About Us" title={<>A Small Team That <span className="text-primary">Treats Your Page Like Ours</span></>} />
+        <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-3">
+          {[
+            { icon: Users, t: "A young startup, not a bloated agency" },
+            { icon: Clock, t: "Hands-on team — no interns on your account" },
+            { icon: Award, t: "Premium content, consistently delivered" },
+            { icon: Bot, t: "Automation that works while you sleep" },
+          ].map((s) => (
+            <div key={s.t} className="flex items-center gap-3 bg-card border border-border rounded-xl p-4 shadow-card">
+              <s.icon className="h-5 w-5 text-primary flex-shrink-0" />
+              <span className="font-semibold text-sm">{s.t}</span>
             </div>
-          </div>
-          <div>
-            <div className="grid sm:grid-cols-2 gap-3 mb-6">
-              {[
-                { icon: Award, t: "Founder — CurlyWave Media" },
-                { icon: Clock, t: "10+ Yrs Marketing Experience" },
-                { icon: Users, t: "Worked With 500+ Brands & MNCs" },
-                { icon: Bot, t: "Scaled 10,000+ SMBs On Automation" },
-              ].map((s) => (
-                <div key={s.t} className="flex items-center gap-3 bg-card border border-border rounded-xl p-3 shadow-card">
-                  <s.icon className="h-5 w-5 text-primary flex-shrink-0" />
-                  <span className="font-semibold text-sm">{s.t}</span>
-                </div>
-              ))}
-            </div>
-            <h3 className="text-2xl font-bold mb-3"><span className="text-primary">Abhinav Dubey</span> — Founder, CurlyWave Media & Automation Pvt. Ltd.</h3>
-            <p className="text-muted-foreground font-medium mb-3">
-              A marketing professional with 10+ years working with top MNCs and Indian startups. CurlyWave is his own young startup — a small, hands-on team that treats every brand's page like its own, with one focus: measurable growth.
-            </p>
-            <p className="text-muted-foreground font-medium">
-              Our promise: no jargon, no lock-ins, no vanity metrics. Just content that looks premium, ads that convert, and automation that works while you sleep.
-            </p>
-          </div>
+          ))}
         </div>
+        <p className="text-muted-foreground font-medium text-center max-w-2xl mx-auto mt-6">
+          No jargon, no lock-ins, no vanity metrics — just content that looks premium and reporting you can actually read.
+        </p>
       </Section>
+
+
 
       {/* Perfect For */}
       <Section className="bg-secondary/40">
