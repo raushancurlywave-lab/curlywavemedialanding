@@ -361,6 +361,26 @@ function LandingPage() {
         </div>
       </Section>
 
+      {/* Our Work */}
+      <Section id="work">
+        <SectionTitle eyebrow="Our Work" title={<>Creatives We <span className="text-primary">Actually Ship</span></>} />
+        <div className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {WORK.map((w, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
+            >
+              <img src={w.src} alt={w.alt} loading="lazy" className="w-full h-full object-cover aspect-[4/5]" />
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+
       {/* Why Us */}
       <Section>
         <SectionTitle eyebrow="Why CurlyWave" title={<>Everything Your Brand Needs — <span className="text-primary">Under One Roof</span></>} />
