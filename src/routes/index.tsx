@@ -29,6 +29,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const SITE_URL = "https://curlywavemedialanding.lovable.app";
 
