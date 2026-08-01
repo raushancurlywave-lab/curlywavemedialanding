@@ -451,8 +451,11 @@ function LandingPage() {
         <SectionTitle
           eyebrow="Every Detail, In Writing"
           title={<>What's Inside Each <span className="text-primary">Plan</span></>}
-          sub="Only social media management — no vague retainers, no hidden add-ons. This is exactly what we deliver every month."
         />
+        <p className="text-center text-muted-foreground font-medium max-w-2xl mx-auto -mt-6 mb-10">
+          Only social media management — no vague retainers, no hidden add-ons. This is exactly what we deliver every month.
+        </p>
+
         <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-6">
           {plans.map((p) => (
             <div key={p.name} className="bg-card border border-border rounded-2xl shadow-card overflow-hidden">
