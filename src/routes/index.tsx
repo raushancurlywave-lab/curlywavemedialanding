@@ -258,14 +258,8 @@ function LandingPage() {
   ];
 
 
-  const faqs = [
-    { q: "How soon do you start after I sign up?", a: "Onboarding takes 48 hours. You'll get a dedicated WhatsApp group, brand questionnaire and content calendar within 3 working days." },
-    { q: "Do I need to give access to my accounts?", a: "Yes — we use secure Meta Business Suite access. You stay the owner at all times; we never change passwords." },
-    { q: "Is there a lock-in contract?", a: "No lock-in. Plans are billed monthly and you can pause or cancel anytime with 7 days notice." },
-    { q: "Do you handle ads budget separately?", a: "Yes. Management fee is what you see; the ad spend goes directly to Meta/Google from your card and is fully transparent." },
-    { q: "Which cities do you serve?", a: "We serve clients across India. On-location shoots (Business plan) are available in top 10 metros; other cities on request." },
-    { q: "How do I pay?", a: "Secure payments via Razorpay — UPI, cards, netbanking. GST invoice provided every month." },
-  ];
+  const faqs = FAQS;
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
