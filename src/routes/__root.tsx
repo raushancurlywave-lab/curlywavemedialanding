@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import logo from "@/assets/curlywave-logo.jpeg";
 
 function NotFoundComponent() {
   return (
@@ -101,7 +102,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           name: "CurlyWave Media & Automation Pvt. Ltd.",
           alternateName: "CurlyWave Media",
           url: "https://curlywavemedialanding.lovable.app",
-          logo: "https://curlywavemedialanding.lovable.app/__l5e/assets-v1/359cac90-5dd8-4524-a4b9-86daad5075d9/curlywave-logo.jpeg",
+          logo,
           description:
             "CurlyWave Media & Automation Pvt. Ltd. provides done-for-you social media management and automation for growing brands in India.",
         }),
@@ -109,7 +110,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "https://curlywavemedialanding.lovable.app/__l5e/assets-v1/359cac90-5dd8-4524-a4b9-86daad5075d9/curlywave-logo.jpeg", type: "image/x-icon" },
+      { rel: "icon", href: logo, type: "image/jpeg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

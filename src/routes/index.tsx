@@ -7,21 +7,20 @@ import {
   GraduationCap, ShoppingBag, User, Palette, Home, Trophy, ArrowRight, Sparkles, Clock,
   Camera, PenTool, BarChart3, Megaphone, Video, Target, Play,
 } from "lucide-react";
-import logoAsset from "@/assets/curlywave-logo.jpeg.asset.json";
-import demoVideo from "@/assets/curlywave-demo.mp4.asset.json";
-import demoVideoWebm from "@/assets/curlywave-demo.webm.asset.json";
-import demoPoster from "@/assets/curlywave-poster.jpg.asset.json";
-import work1 from "@/assets/work-1.png.asset.json";
-import work2 from "@/assets/work-2.jpg.asset.json";
-import work3 from "@/assets/work-3.jpg.asset.json";
-import work4 from "@/assets/work-4.jpg.asset.json";
-import { assetUrl } from "@/lib/asset-url";
+import logo from "@/assets/curlywave-logo.jpeg";
+import demoVideo from "@/assets/curlywave-demo.mp4";
+import demoVideoWebm from "@/assets/curlywave-demo.webm";
+import demoPoster from "@/assets/curlywave-poster.jpg";
+import work1 from "@/assets/work-1.png";
+import work2 from "@/assets/work-2.jpg";
+import work3 from "@/assets/work-3.jpg";
+import work4 from "@/assets/work-4.jpg";
 
 const WORK = [
-  { src: assetUrl(work3.url), alt: "Client review creative with 5 star rating" },
-  { src: assetUrl(work1.url), alt: "CurlyWave social media management plan creative" },
-  { src: assetUrl(work2.url), alt: "Video ads campaign creative" },
-  { src: assetUrl(work4.url), alt: "UGC ads creative with 1000+ creators" },
+  { src: work3, alt: "Client review creative with 5 star rating" },
+  { src: work1, alt: "CurlyWave social media management plan creative" },
+  { src: work2, alt: "Video ads campaign creative" },
+  { src: work4, alt: "UGC ads creative with 1000+ creators" },
 ];
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -94,7 +93,7 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-const LOGO = assetUrl(logoAsset.url);
+const LOGO = logo;
 
 function HeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -123,7 +122,7 @@ function HeroVideo() {
     <>
       <video
         ref={ref}
-        poster={assetUrl(demoPoster.url)}
+        poster={demoPoster}
         controls
         playsInline
         muted
@@ -134,8 +133,8 @@ function HeroVideo() {
         onPause={() => setPlaying(false)}
         className="h-full w-full object-cover"
       >
-        <source src={assetUrl(demoVideoWebm.url)} type="video/webm" />
-        <source src={assetUrl(demoVideo.url)} type="video/mp4" />
+        <source src={demoVideoWebm} type="video/webm" />
+        <source src={demoVideo} type="video/mp4" />
       </video>
       {!playing && (
         <button
