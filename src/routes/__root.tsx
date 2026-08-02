@@ -109,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/__l5e/assets-v1/359cac90-5dd8-4524-a4b9-86daad5075d9/curlywave-logo.jpeg", type: "image/x-icon" },
+      { rel: "icon", href: "https://curlywavemedialanding.lovable.app/__l5e/assets-v1/359cac90-5dd8-4524-a4b9-86daad5075d9/curlywave-logo.jpeg", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
