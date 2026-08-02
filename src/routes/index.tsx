@@ -17,9 +17,9 @@ import work3 from "@/assets/work-3.jpg.asset.json";
 import work4 from "@/assets/work-4.jpg.asset.json";
 
 const WORK = [
+  { src: work3.url, alt: "Client review creative with 5 star rating" },
   { src: work1.url, alt: "CurlyWave social media management plan creative" },
   { src: work2.url, alt: "Video ads campaign creative" },
-  { src: work3.url, alt: "Client review creative with 5 star rating" },
   { src: work4.url, alt: "UGC ads creative with 1000+ creators" },
 ];
 import { Button } from "@/components/ui/button";
