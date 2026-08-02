@@ -94,7 +94,7 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-const LOGO = logoAsset.url;
+const LOGO = assetUrl(logoAsset.url);
 
 function HeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -123,7 +123,7 @@ function HeroVideo() {
     <>
       <video
         ref={ref}
-        poster={demoPoster.url}
+        poster={assetUrl(demoPoster.url)}
         controls
         playsInline
         muted
@@ -134,8 +134,8 @@ function HeroVideo() {
         onPause={() => setPlaying(false)}
         className="h-full w-full object-cover"
       >
-        <source src={demoVideoWebm.url} type="video/webm" />
-        <source src={demoVideo.url} type="video/mp4" />
+        <source src={assetUrl(demoVideoWebm.url)} type="video/webm" />
+        <source src={assetUrl(demoVideo.url)} type="video/mp4" />
       </video>
       {!playing && (
         <button
