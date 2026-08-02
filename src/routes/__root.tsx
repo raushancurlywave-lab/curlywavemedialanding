@@ -90,8 +90,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "CurlyWave Media & Automation Pvt. Ltd. — done-for-you Instagram, Facebook & WhatsApp management. Plans from ₹499/mo. Book a free strategy call." },
       { property: "og:description", content: "CurlyWave Media & Automation Pvt. Ltd. — done-for-you Instagram, Facebook & WhatsApp management. Plans from ₹499/mo. Book a free strategy call." },
       { name: "twitter:description", content: "CurlyWave Media & Automation Pvt. Ltd. — done-for-you Instagram, Facebook & WhatsApp management. Plans from ₹499/mo. Book a free strategy call." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6cad3d13-f42b-4d53-8241-e8bbf0a12f6a" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6cad3d13-f42b-4d53-8241-e8bbf0a12f6a" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9da72e7c-f7cd-4895-8c8e-7002b16738c1/id-preview-7b5e6f80--74d5b7e6-c9e7-4b53-93cb-28080ae8c356.lovable.app-1785658452874.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9da72e7c-f7cd-4895-8c8e-7002b16738c1/id-preview-7b5e6f80--74d5b7e6-c9e7-4b53-93cb-28080ae8c356.lovable.app-1785658452874.png" },
     ],
     scripts: [
       {
@@ -110,7 +110,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: logo, type: "image/jpeg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
