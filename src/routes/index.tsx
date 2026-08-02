@@ -209,20 +209,22 @@ function LandingPage() {
       return;
     }
     setSubmitting(true);
-    const { error } = await supabase.from("leads").insert({
-      name: form.name.trim(),
-      email: form.email.trim(),
-      phone: form.phone.trim(),
-      business: form.business.trim() || null,
-      plan: form.plan,
-    });
-    setSubmitting(false);
-    if (error) {
+    try {
+      const { error } = await supabase.from("leads").insert({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        business: form.business.trim() || null,
+        plan: form.plan,
+      });
+      if (error) throw error;
+      toast.success("Details submitted! Our team will call you within 24 hours.");
+      setForm({ name: "", email: "", phone: "", business: "", plan: "Growth — ₹999/mo" });
+    } catch {
       toast.error("Could not send your details. Please try again or WhatsApp us.");
-      return;
+    } finally {
+      setSubmitting(false);
     }
-    toast.success("Thanks! Our team will call you within 24 hours.");
-    setForm({ name: "", email: "", phone: "", business: "", plan: "Growth — ₹999/mo" });
   };
 
 
@@ -751,24 +753,25 @@ function LandingPage() {
             <div className="space-y-4">
               <div>
                 <Label htmlFor="name" className="font-bold">Full Name</Label>
-                <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className="h-12 mt-1.5" />
+                <Input id="name" name="name" required autoComplete="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className="h-12 mt-1.5" />
               </div>
               <div>
                 <Label htmlFor="email" className="font-bold">Email</Label>
-                <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@business.com" className="h-12 mt-1.5" />
+                <Input id="email" name="email" type="email" required autoComplete="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@business.com" className="h-12 mt-1.5" />
               </div>
               <div>
                 <Label htmlFor="phone" className="font-bold">WhatsApp Number</Label>
-                <Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+91 98xxxxxxxx" className="h-12 mt-1.5" />
+                <Input id="phone" name="phone" type="tel" required autoComplete="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+91 98xxxxxxxx" className="h-12 mt-1.5" />
               </div>
               <div>
                 <Label htmlFor="biz" className="font-bold">Business Type</Label>
-                <Input id="biz" value={form.business} onChange={(e) => setForm({ ...form, business: e.target.value })} placeholder="Restaurant, Clinic, D2C, etc." className="h-12 mt-1.5" />
+                <Input id="biz" name="business" autoComplete="organization" value={form.business} onChange={(e) => setForm({ ...form, business: e.target.value })} placeholder="Restaurant, Clinic, D2C, etc." className="h-12 mt-1.5" />
               </div>
               <div>
                 <Label htmlFor="plan" className="font-bold">Interested Plan</Label>
                 <select
                   id="plan"
+                  name="plan"
                   value={form.plan}
                   onChange={(e) => setForm({ ...form, plan: e.target.value })}
                   className="w-full h-12 mt-1.5 rounded-md border border-input bg-background px-3 font-semibold"
