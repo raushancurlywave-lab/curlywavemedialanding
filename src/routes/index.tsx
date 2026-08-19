@@ -562,9 +562,16 @@ function LandingPage() {
                   <h3 className="text-2xl font-bold">{p.name}</h3>
                   <p className={`text-sm font-medium mt-1 ${highlight ? "opacity-80" : "opacity-70"}`}>{p.tagline}</p>
                   <div className="mt-5 flex items-baseline gap-2">
-                    <span className="text-5xl font-bold">₹{p.price.toLocaleString("en-IN")}</span>
-                    <span className="font-semibold opacity-70">/mo</span>
+                    <span className="text-5xl font-bold">
+                      ₹{(cycle === "quarterly" ? p.price * 3 : p.price).toLocaleString("en-IN")}
+                    </span>
+                    <span className="font-semibold opacity-70">{cycle === "quarterly" ? "/quarter" : "/mo"}</span>
                   </div>
+                  {cycle === "quarterly" && (
+                    <p className="text-xs font-semibold opacity-70 mt-1">
+                      Billed once for 3 months (₹{p.price.toLocaleString("en-IN")}/mo)
+                    </p>
+                  )}
                   <ul className="mt-6 space-y-3 flex-1">
                     {p.features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm font-semibold">
