@@ -845,7 +845,7 @@ function LandingPage() {
                 >
                   <option>Starter — ₹499/mo</option>
                   <option>Growth — ₹999/mo</option>
-                  <option>Business — ₹5,999/mo</option>
+                  <option>Scale — ₹5,999/mo</option>
                   <option>Not sure yet</option>
                 </select>
               </div>
