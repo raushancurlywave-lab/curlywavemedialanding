@@ -38,7 +38,7 @@ const FAQS = [
   { q: "Do I need to give access to my accounts?", a: "Yes — we use secure Meta Business Suite access. You stay the owner at all times; we never change passwords." },
   { q: "Is there a lock-in contract?", a: "No lock-in. Plans are billed monthly and you can pause or cancel anytime with 7 days notice." },
   { q: "Do you handle ads budget separately?", a: "Yes. Management fee is what you see; the ad spend goes directly to Meta/Google from your card and is fully transparent." },
-  { q: "Which cities do you serve?", a: "We serve clients across India. On-location shoots (Business plan) are available in top 10 metros; other cities on request." },
+  { q: "Which cities do you serve?", a: "We serve clients across India. Meta ads setup (Scale plan) and reel production are handled remotely; on-request add-ons are available in top 10 metros." },
   { q: "How do I pay?", a: "Secure payments via Razorpay — UPI, cards, netbanking. GST invoice provided every month." },
 ];
 
