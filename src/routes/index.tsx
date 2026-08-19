@@ -860,6 +860,45 @@ function LandingPage() {
         </div>
       </Section>
 
+      {/* LEGAL */}
+      <Section id="legal" className="bg-secondary">
+        <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-6">
+          <div id="terms" className="bg-card border border-border rounded-2xl p-7 shadow-card scroll-mt-24">
+            <h2 className="text-2xl font-bold">Terms & Conditions</h2>
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mt-2">
+              Effective from 1 January 2024 · Last updated 1 January 2024
+            </p>
+            <div className="mt-5 space-y-4 text-sm font-medium text-muted-foreground">
+              <p><span className="font-bold text-foreground">1. Services.</span> CurlyWave Media &amp; Automation Pvt. Ltd. provides social media management and, on the Scale plan, Meta ads setup for one campaign. Deliverables are exactly those listed on the plan you purchase.</p>
+              <p><span className="font-bold text-foreground">2. Billing.</span> Starter and Growth plans require a minimum commitment of 3 months. Plans may be billed monthly or quarterly in advance. All fees are exclusive of applicable GST.</p>
+              <p><span className="font-bold text-foreground">3. Ad spend.</span> Any advertising budget is paid directly by you to Meta and is not included in plan fees.</p>
+              <p><span className="font-bold text-foreground">4. Client responsibilities.</span> You agree to provide brand assets, secure account access via Meta Business Suite, and timely approvals. Delays in approvals may shift the delivery schedule.</p>
+              <p><span className="font-bold text-foreground">5. Cancellation.</span> Cancellation requests take effect at the end of the current committed billing term. Amounts already paid for a running term are non-refundable once work has commenced.</p>
+              <p><span className="font-bold text-foreground">6. Ownership.</span> On full payment, you own the final published creatives. Working files, templates and internal processes remain ours.</p>
+              <p><span className="font-bold text-foreground">7. Results.</span> We do not guarantee specific follower, reach or revenue outcomes, as platform algorithms and market conditions are outside our control.</p>
+              <p><span className="font-bold text-foreground">8. Governing law.</span> These terms are governed by the laws of India, with jurisdiction at Patna, Bihar.</p>
+            </div>
+          </div>
+
+          <div id="privacy" className="bg-card border border-border rounded-2xl p-7 shadow-card scroll-mt-24">
+            <h2 className="text-2xl font-bold">Privacy Policy</h2>
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mt-2">
+              Effective from 1 January 2024 · Last updated 1 January 2024
+            </p>
+            <div className="mt-5 space-y-4 text-sm font-medium text-muted-foreground">
+              <p><span className="font-bold text-foreground">1. What we collect.</span> Name, email, phone number, business type and the plan you're interested in — only what you submit through our enquiry form.</p>
+              <p><span className="font-bold text-foreground">2. Why we collect it.</span> To contact you about your enquiry, schedule your strategy call, and deliver services if you become a client.</p>
+              <p><span className="font-bold text-foreground">3. Sharing.</span> We do not sell or rent your data. It is shared only with service providers who help us operate (hosting, database, payments) and where required by law.</p>
+              <p><span className="font-bold text-foreground">4. Account access.</span> Where you grant access to your social accounts, we use Meta Business Suite roles. You remain the owner and we never change your passwords.</p>
+              <p><span className="font-bold text-foreground">5. Retention.</span> Enquiry data is kept for as long as needed to respond and to meet legal or accounting obligations.</p>
+              <p><span className="font-bold text-foreground">6. Your choices.</span> Write to us to access, correct or delete your details, or to stop receiving messages from us.</p>
+              <p><span className="font-bold text-foreground">7. Security.</span> Data is stored with access controls and encrypted connections. No online service can promise absolute security.</p>
+              <p><span className="font-bold text-foreground">8. Contact.</span> For any privacy request, reach us through the enquiry form above.</p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* Footer */}
       <footer className="bg-foreground text-background py-10 px-4">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row gap-6 items-center justify-between">
@@ -871,10 +910,9 @@ function LandingPage() {
             </div>
           </div>
           <div className="flex gap-6 text-sm opacity-80">
-            <a href="#" className="hover:opacity-100">Privacy</a>
-            <a href="#" className="hover:opacity-100">Terms</a>
-            <a href="#" className="hover:opacity-100">Refund Policy</a>
-            <a href="#" className="hover:opacity-100">Contact</a>
+            <a href="#privacy" className="hover:opacity-100">Privacy</a>
+            <a href="#terms" className="hover:opacity-100">Terms</a>
+            <a href="#contact" className="hover:opacity-100">Contact</a>
           </div>
         </div>
       </footer>
