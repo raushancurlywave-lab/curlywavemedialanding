@@ -523,6 +523,20 @@ function LandingPage() {
             <p className="text-sm font-bold uppercase tracking-widest opacity-80 mb-3">Simple, Transparent Pricing</p>
             <h2 className="text-3xl sm:text-5xl font-bold mb-3">Pick The Plan That <span className="text-gold">Fits Your Growth</span></h2>
             <p className="opacity-80 font-medium">All plans include content, posting & monthly reporting. No hidden fees.</p>
+            <div className="mt-6 inline-flex rounded-full bg-primary-foreground/10 border border-primary-foreground/20 p-1">
+              {(["monthly", "quarterly"] as const).map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setCycle(c)}
+                  className={`px-5 py-2 rounded-full text-sm font-bold capitalize transition-colors ${
+                    cycle === c ? "bg-gold text-gold-foreground" : "opacity-80 hover:opacity-100"
+                  }`}
+                >
+                  {c}{c === "quarterly" ? " (3 months)" : ""}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {plans.map((p) => {
