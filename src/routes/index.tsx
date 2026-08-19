@@ -38,7 +38,7 @@ const FAQS = [
   { q: "Do I need to give access to my accounts?", a: "Yes — we use secure Meta Business Suite access. You stay the owner at all times; we never change passwords." },
   { q: "Is there a lock-in contract?", a: "No lock-in. Plans are billed monthly and you can pause or cancel anytime with 7 days notice." },
   { q: "Do you handle ads budget separately?", a: "Yes. Management fee is what you see; the ad spend goes directly to Meta/Google from your card and is fully transparent." },
-  { q: "Which cities do you serve?", a: "We serve clients across India. On-location shoots (Business plan) are available in top 10 metros; other cities on request." },
+  { q: "Which cities do you serve?", a: "We serve clients across India. Meta ads setup (Scale plan) and reel production are handled remotely; on-request add-ons are available in top 10 metros." },
   { q: "How do I pay?", a: "Secure payments via Razorpay — UPI, cards, netbanking. GST invoice provided every month." },
 ];
 
@@ -74,7 +74,7 @@ export const Route = createFileRoute("/")({
           offers: [
             { "@type": "Offer", name: "Starter Plan", price: "499", priceCurrency: "INR" },
             { "@type": "Offer", name: "Growth Plan", price: "999", priceCurrency: "INR" },
-            { "@type": "Offer", name: "Business Plan", price: "5999", priceCurrency: "INR" },
+            { "@type": "Offer", name: "Scale Plan", price: "5999", priceCurrency: "INR" },
           ],
         }),
       },
@@ -100,22 +100,63 @@ const LOGO = logo;
 function HeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(false);
 
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    v.muted = true;
-    const tryPlay = () => {
-      v.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+
+    const tryPlay = async () => {
+      // Try with sound first — that's the desired experience.
+      v.muted = false;
+      v.volume = 1;
+      try {
+        await v.play();
+        setMuted(false);
+        setPlaying(true);
+        return;
+      } catch {
+        // Browser blocked audible autoplay — fall back to muted autoplay.
+      }
+      v.muted = true;
+      setMuted(true);
+      try {
+        await v.play();
+        setPlaying(true);
+      } catch {
+        setPlaying(false);
+      }
     };
+
     tryPlay();
     v.addEventListener("loadeddata", tryPlay);
-    return () => v.removeEventListener("loadeddata", tryPlay);
+
+    // First user interaction anywhere on the page unmutes the video.
+    const unmute = () => {
+      if (!ref.current) return;
+      ref.current.muted = false;
+      ref.current.volume = 1;
+      ref.current.play().catch(() => {});
+      setMuted(false);
+    };
+    window.addEventListener("pointerdown", unmute, { once: true });
+    window.addEventListener("keydown", unmute, { once: true });
+    window.addEventListener("touchstart", unmute, { once: true });
+
+    return () => {
+      v.removeEventListener("loadeddata", tryPlay);
+      window.removeEventListener("pointerdown", unmute);
+      window.removeEventListener("keydown", unmute);
+      window.removeEventListener("touchstart", unmute);
+    };
   }, []);
 
   const handleTap = () => {
     const v = ref.current;
     if (!v) return;
+    v.muted = false;
+    v.volume = 1;
+    setMuted(false);
     if (v.paused) v.play().then(() => setPlaying(true)).catch(() => {});
     else { v.pause(); setPlaying(false); }
   };
@@ -127,7 +168,6 @@ function HeroVideo() {
         poster={demoPoster}
         controls
         playsInline
-        muted
         autoPlay
         loop
         preload="auto"
@@ -142,12 +182,21 @@ function HeroVideo() {
         <button
           type="button"
           onClick={handleTap}
-          aria-label="Play video"
+          aria-label="Play video with sound"
           className="absolute inset-0 flex items-center justify-center bg-foreground/20"
         >
           <span className="h-16 w-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-card">
             <Play className="h-7 w-7 ml-0.5" />
           </span>
+        </button>
+      )}
+      {playing && muted && (
+        <button
+          type="button"
+          onClick={handleTap}
+          className="absolute top-3 right-3 rounded-full bg-foreground/70 text-background px-3 py-1.5 text-xs font-bold"
+        >
+          Tap for sound
         </button>
       )}
     </>
@@ -272,6 +321,8 @@ function LandingPage() {
     { icon: Home, label: "Real Estate Agents" },
   ];
 
+  const [cycle, setCycle] = useState<"monthly" | "quarterly">("monthly");
+
   const plans = [
     {
       name: "Starter",
@@ -282,8 +333,6 @@ function LandingPage() {
         { label: "Accounts", value: "3 accounts (Facebook + Instagram)" },
         { label: "Posts", value: "15 / month" },
         { label: "Billing", value: "Minimum 3 months" },
-        { label: "Content calendar", value: "Monthly, approved by you" },
-        { label: "Reporting", value: "Monthly growth report" },
         { label: "Support", value: "Email, 48h response" },
       ],
       features: [
@@ -291,9 +340,6 @@ function LandingPage() {
         "15 posts / month",
         "Minimum 3 months billing",
         "Captions, hashtags & posting handled",
-        "Monthly content calendar for approval",
-        "Profile / bio optimisation",
-        "Monthly growth report",
       ],
     },
     {
@@ -307,7 +353,6 @@ function LandingPage() {
         { label: "Video reels", value: "5 / month (reel format, edited by us)" },
         { label: "Billing", value: "Minimum 3 months" },
         { label: "Engagement", value: "Comment & DM replies, daily" },
-        { label: "Reporting", value: "Weekly performance report" },
         { label: "Support", value: "WhatsApp, same-day" },
       ],
       features: [
@@ -316,32 +361,31 @@ function LandingPage() {
         "Minimum 3 months billing",
         "Daily comment & DM management",
         "Trend-based reel scripting & editing",
-        "Weekly performance report",
       ],
     },
 
     {
-      name: "Business",
+      name: "Scale",
       price: 5999,
-      tagline: "Full social media desk for your brand",
+      tagline: "Social media + Meta ads setup for your brand",
       badge: "Best Value",
       details: [
         { label: "Platforms", value: "Instagram + Facebook + 1 more (LinkedIn / YouTube Shorts)" },
         { label: "Static posts", value: "30+ / month" },
-        { label: "Reels", value: "20+ / month, custom shot list" },
+        { label: "Reels", value: "15 / month, scripted & edited" },
         { label: "Stories", value: "Daily" },
+        { label: "Meta ads", value: "Ads setup for 1 campaign (ad spend paid by you)" },
         { label: "Engagement", value: "Full inbox & comment handling" },
-        { label: "Extras", value: "Monthly content shoot day" },
         { label: "Reporting", value: "Weekly report + live dashboard" },
         { label: "Support", value: "Dedicated manager, WhatsApp group" },
       ],
       features: [
+        "Social media + Meta ads setup",
         "3 platforms managed end-to-end",
-        "30+ posts, 20+ reels, daily stories",
-        "Monthly content shoot day",
+        "30+ posts, 15 reels, daily stories",
+        "Meta ads setup for 1 campaign",
         "Full inbox, comment & DM handling",
         "Dedicated social media manager",
-        "Weekly strategy call + live dashboard",
       ],
     },
   ];
@@ -530,6 +574,20 @@ function LandingPage() {
             <p className="text-sm font-bold uppercase tracking-widest opacity-80 mb-3">Simple, Transparent Pricing</p>
             <h2 className="text-3xl sm:text-5xl font-bold mb-3">Pick The Plan That <span className="text-gold">Fits Your Growth</span></h2>
             <p className="opacity-80 font-medium">All plans include content, posting & monthly reporting. No hidden fees.</p>
+            <div className="mt-6 inline-flex rounded-full bg-primary-foreground/10 border border-primary-foreground/20 p-1">
+              {(["monthly", "quarterly"] as const).map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setCycle(c)}
+                  className={`px-5 py-2 rounded-full text-sm font-bold capitalize transition-colors ${
+                    cycle === c ? "bg-gold text-gold-foreground" : "opacity-80 hover:opacity-100"
+                  }`}
+                >
+                  {c}{c === "quarterly" ? " (3 months)" : ""}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {plans.map((p) => {
@@ -553,9 +611,16 @@ function LandingPage() {
                   <h3 className="text-2xl font-bold">{p.name}</h3>
                   <p className={`text-sm font-medium mt-1 ${highlight ? "opacity-80" : "opacity-70"}`}>{p.tagline}</p>
                   <div className="mt-5 flex items-baseline gap-2">
-                    <span className="text-5xl font-bold">₹{p.price.toLocaleString("en-IN")}</span>
-                    <span className="font-semibold opacity-70">/mo</span>
+                    <span className="text-5xl font-bold">
+                      ₹{(cycle === "quarterly" ? p.price * 3 : p.price).toLocaleString("en-IN")}
+                    </span>
+                    <span className="font-semibold opacity-70">{cycle === "quarterly" ? "/quarter" : "/mo"}</span>
                   </div>
+                  {cycle === "quarterly" && (
+                    <p className="text-xs font-semibold opacity-70 mt-1">
+                      Billed once for 3 months (₹{p.price.toLocaleString("en-IN")}/mo)
+                    </p>
+                  )}
                   <ul className="mt-6 space-y-3 flex-1">
                     {p.features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm font-semibold">
@@ -780,7 +845,7 @@ function LandingPage() {
                 >
                   <option>Starter — ₹499/mo</option>
                   <option>Growth — ₹999/mo</option>
-                  <option>Business — ₹5,999/mo</option>
+                  <option>Scale — ₹5,999/mo</option>
                   <option>Not sure yet</option>
                 </select>
               </div>
@@ -795,6 +860,45 @@ function LandingPage() {
         </div>
       </Section>
 
+      {/* LEGAL */}
+      <Section id="legal" className="bg-secondary">
+        <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-6">
+          <div id="terms" className="bg-card border border-border rounded-2xl p-7 shadow-card scroll-mt-24">
+            <h2 className="text-2xl font-bold">Terms & Conditions</h2>
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mt-2">
+              Effective from 1 January 2024 · Last updated 1 January 2024
+            </p>
+            <div className="mt-5 space-y-4 text-sm font-medium text-muted-foreground">
+              <p><span className="font-bold text-foreground">1. Services.</span> CurlyWave Media &amp; Automation Pvt. Ltd. provides social media management and, on the Scale plan, Meta ads setup for one campaign. Deliverables are exactly those listed on the plan you purchase.</p>
+              <p><span className="font-bold text-foreground">2. Billing.</span> Starter and Growth plans require a minimum commitment of 3 months. Plans may be billed monthly or quarterly in advance. All fees are exclusive of applicable GST.</p>
+              <p><span className="font-bold text-foreground">3. Ad spend.</span> Any advertising budget is paid directly by you to Meta and is not included in plan fees.</p>
+              <p><span className="font-bold text-foreground">4. Client responsibilities.</span> You agree to provide brand assets, secure account access via Meta Business Suite, and timely approvals. Delays in approvals may shift the delivery schedule.</p>
+              <p><span className="font-bold text-foreground">5. Cancellation.</span> Cancellation requests take effect at the end of the current committed billing term. Amounts already paid for a running term are non-refundable once work has commenced.</p>
+              <p><span className="font-bold text-foreground">6. Ownership.</span> On full payment, you own the final published creatives. Working files, templates and internal processes remain ours.</p>
+              <p><span className="font-bold text-foreground">7. Results.</span> We do not guarantee specific follower, reach or revenue outcomes, as platform algorithms and market conditions are outside our control.</p>
+              <p><span className="font-bold text-foreground">8. Governing law.</span> These terms are governed by the laws of India, with jurisdiction at Patna, Bihar.</p>
+            </div>
+          </div>
+
+          <div id="privacy" className="bg-card border border-border rounded-2xl p-7 shadow-card scroll-mt-24">
+            <h2 className="text-2xl font-bold">Privacy Policy</h2>
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mt-2">
+              Effective from 1 January 2024 · Last updated 1 January 2024
+            </p>
+            <div className="mt-5 space-y-4 text-sm font-medium text-muted-foreground">
+              <p><span className="font-bold text-foreground">1. What we collect.</span> Name, email, phone number, business type and the plan you're interested in — only what you submit through our enquiry form.</p>
+              <p><span className="font-bold text-foreground">2. Why we collect it.</span> To contact you about your enquiry, schedule your strategy call, and deliver services if you become a client.</p>
+              <p><span className="font-bold text-foreground">3. Sharing.</span> We do not sell or rent your data. It is shared only with service providers who help us operate (hosting, database, payments) and where required by law.</p>
+              <p><span className="font-bold text-foreground">4. Account access.</span> Where you grant access to your social accounts, we use Meta Business Suite roles. You remain the owner and we never change your passwords.</p>
+              <p><span className="font-bold text-foreground">5. Retention.</span> Enquiry data is kept for as long as needed to respond and to meet legal or accounting obligations.</p>
+              <p><span className="font-bold text-foreground">6. Your choices.</span> Write to us to access, correct or delete your details, or to stop receiving messages from us.</p>
+              <p><span className="font-bold text-foreground">7. Security.</span> Data is stored with access controls and encrypted connections. No online service can promise absolute security.</p>
+              <p><span className="font-bold text-foreground">8. Contact.</span> For any privacy request, reach us through the enquiry form above.</p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* Footer */}
       <footer className="bg-foreground text-background py-10 px-4">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row gap-6 items-center justify-between">
@@ -806,10 +910,9 @@ function LandingPage() {
             </div>
           </div>
           <div className="flex gap-6 text-sm opacity-80">
-            <a href="#" className="hover:opacity-100">Privacy</a>
-            <a href="#" className="hover:opacity-100">Terms</a>
-            <a href="#" className="hover:opacity-100">Refund Policy</a>
-            <a href="#" className="hover:opacity-100">Contact</a>
+            <a href="#privacy" className="hover:opacity-100">Privacy</a>
+            <a href="#terms" className="hover:opacity-100">Terms</a>
+            <a href="#contact" className="hover:opacity-100">Contact</a>
           </div>
         </div>
       </footer>
