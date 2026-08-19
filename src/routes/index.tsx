@@ -202,9 +202,6 @@ function HeroVideo() {
     </>
   );
 }
-    </>
-  );
-}
 
 
 function useCountdown(minutes: number) {
