@@ -74,7 +74,7 @@ export const Route = createFileRoute("/")({
           offers: [
             { "@type": "Offer", name: "Starter Plan", price: "499", priceCurrency: "INR" },
             { "@type": "Offer", name: "Growth Plan", price: "999", priceCurrency: "INR" },
-            { "@type": "Offer", name: "Business Plan", price: "5999", priceCurrency: "INR" },
+            { "@type": "Offer", name: "Scale Plan", price: "5999", priceCurrency: "INR" },
           ],
         }),
       },
