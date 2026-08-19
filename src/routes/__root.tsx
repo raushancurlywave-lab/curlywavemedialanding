@@ -81,6 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#0b1020" },
       { name: "author", content: "CurlyWave Media & Automation Pvt. Ltd." },
+      { name: "google-site-verification", content: "0NZ7c09AGoLvCE4C65WkjRSt6K1mut7zPucDcPlfMig" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "CurlyWave Media" },
       { name: "twitter:card", content: "summary_large_image" },
