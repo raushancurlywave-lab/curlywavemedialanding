@@ -100,22 +100,63 @@ const LOGO = logo;
 function HeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(false);
 
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    v.muted = true;
-    const tryPlay = () => {
-      v.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+
+    const tryPlay = async () => {
+      // Try with sound first — that's the desired experience.
+      v.muted = false;
+      v.volume = 1;
+      try {
+        await v.play();
+        setMuted(false);
+        setPlaying(true);
+        return;
+      } catch {
+        // Browser blocked audible autoplay — fall back to muted autoplay.
+      }
+      v.muted = true;
+      setMuted(true);
+      try {
+        await v.play();
+        setPlaying(true);
+      } catch {
+        setPlaying(false);
+      }
     };
+
     tryPlay();
     v.addEventListener("loadeddata", tryPlay);
-    return () => v.removeEventListener("loadeddata", tryPlay);
+
+    // First user interaction anywhere on the page unmutes the video.
+    const unmute = () => {
+      if (!ref.current) return;
+      ref.current.muted = false;
+      ref.current.volume = 1;
+      ref.current.play().catch(() => {});
+      setMuted(false);
+    };
+    window.addEventListener("pointerdown", unmute, { once: true });
+    window.addEventListener("keydown", unmute, { once: true });
+    window.addEventListener("touchstart", unmute, { once: true });
+
+    return () => {
+      v.removeEventListener("loadeddata", tryPlay);
+      window.removeEventListener("pointerdown", unmute);
+      window.removeEventListener("keydown", unmute);
+      window.removeEventListener("touchstart", unmute);
+    };
   }, []);
 
   const handleTap = () => {
     const v = ref.current;
     if (!v) return;
+    v.muted = false;
+    v.volume = 1;
+    setMuted(false);
     if (v.paused) v.play().then(() => setPlaying(true)).catch(() => {});
     else { v.pause(); setPlaying(false); }
   };
@@ -127,7 +168,6 @@ function HeroVideo() {
         poster={demoPoster}
         controls
         playsInline
-        muted
         autoPlay
         loop
         preload="auto"
@@ -142,7 +182,7 @@ function HeroVideo() {
         <button
           type="button"
           onClick={handleTap}
-          aria-label="Play video"
+          aria-label="Play video with sound"
           className="absolute inset-0 flex items-center justify-center bg-foreground/20"
         >
           <span className="h-16 w-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-card">
@@ -150,6 +190,18 @@ function HeroVideo() {
           </span>
         </button>
       )}
+      {playing && muted && (
+        <button
+          type="button"
+          onClick={handleTap}
+          className="absolute top-3 right-3 rounded-full bg-foreground/70 text-background px-3 py-1.5 text-xs font-bold"
+        >
+          Tap for sound
+        </button>
+      )}
+    </>
+  );
+}
     </>
   );
 }
