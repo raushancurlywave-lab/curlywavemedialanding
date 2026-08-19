@@ -272,6 +272,8 @@ function LandingPage() {
     { icon: Home, label: "Real Estate Agents" },
   ];
 
+  const [cycle, setCycle] = useState<"monthly" | "quarterly">("monthly");
+
   const plans = [
     {
       name: "Starter",
